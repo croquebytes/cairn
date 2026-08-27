@@ -26,8 +26,8 @@
 .plane {
   position: absolute;
   top: 0; left: 0;
-  width: 1600px;
-  height: 800px;
+  width: 1680px;
+  height: 780px;
   transform-origin: 0 0;
   transition: transform 680ms var(--ease-out);
   will-change: transform;
@@ -177,7 +177,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 /* ----------------------------------------------- objects on the board ---- */
 
 /* hero scrawl — static thesis, top-left */
-.s-hero { position: absolute; left: 56px; top: 48px; width: 700px; }
+.s-hero { position: absolute; left: 40px; top: 40px; width: 700px; }
 .s-hero h1 {
   font-size: 74px;
   line-height: 1.02;
@@ -198,13 +198,13 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 
 .s-hint {
   position: absolute;
-  left: auto; right: 56px; top: 26px;
+  left: auto; right: 40px; top: 18px;
   transform: rotate(-2deg);
   white-space: nowrap;
 }
 
 /* kit sticky */
-.s-kit { left: 826px; top: 92px; width: 238px; }
+.s-kit { left: 826px; top: 60px; width: 238px; }
 .s-kit .note { padding: 18px; }
 .s-kit .note-title { font-size: 19px; display: block; margin-bottom: 6px; }
 
@@ -218,7 +218,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 }
 
 /* builder card — the star */
-.s-builder { left: 1116px; top: 86px; width: 428px; }
+.s-builder { left: 1150px; top: 72px; width: 428px; }
 .bcard {
   display: block;
   position: relative;
@@ -268,7 +268,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 }
 
 /* loop strip */
-.s-loop { left: 56px; top: 436px; width: 690px; }
+.s-loop { left: 40px; top: 424px; width: 690px; }
 .s-loop-card { display: block; position: relative; padding-bottom: 18px; }
 .s-loop-title {
   display: block;
@@ -300,25 +300,25 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 .s-loop-note { position: absolute; right: 0; bottom: -6px; }
 
 /* skills sticky */
-.s-skills { left: 856px; top: 250px; width: 220px; }
+.s-skills { left: 856px; top: 208px; width: 220px; }
 .s-skills .note { padding: 18px; }
 .s-skills .note-title { font-size: 19px; display: block; margin-bottom: 6px; }
 
 /* guardrail cluster — three small stickies, slightly shingled */
-.s-rules { left: 812px; top: 402px; width: 256px; }
+.s-rules { left: 812px; top: 356px; width: 256px; }
 .s-rules-stack { display: grid; gap: 10px; }
 .mini-note { display: block; padding: 12px 14px; }
 .mini-note .note-title { font-size: 15px; display: block; margin-bottom: 2px; }
 .mini-note .spot-line { font-size: 13px; }
 
 /* m365 polaroid */
-.s-m365 { left: 1150px; top: 350px; width: 362px; }
+.s-m365 { left: 1190px; top: 300px; width: 362px; }
 .s-m365 .polaroid { display: block; padding: 18px 18px 14px; }
 .s-m365 .polaroid-title { font-size: 19px; display: block; margin-bottom: 10px; }
 .mini-map { width: 100%; height: auto; display: block; margin-bottom: 10px; }
 
 /* torn principle page */
-.s-principle { left: 56px; top: 586px; width: 430px; }
+.s-principle { left: 40px; top: 566px; width: 430px; }
 .s-principle .spot-card { display: block; position: relative; }
 .s-principle .tape--top { z-index: 5; }
 .s-torn {
@@ -344,11 +344,11 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 .s-cite { color: var(--ink-soft); }
 
 /* doodles + tray + ghosts */
-.s-doodles { position: absolute; left: 508px; top: 596px; width: 182px; pointer-events: none; }
-.s-tray { position: absolute; left: 1200px; top: 604px; width: 256px; pointer-events: none; }
-.sg-1 { left: 286px; top: 320px; width: 240px; height: 100px; }
-.sg-2 { left: 860px; top: 636px; width: 220px; height: 96px; }
-.sg-3 { left: 764px; top: 22px; width: 160px; height: 80px; }
+.s-doodles { position: absolute; left: 508px; top: 556px; width: 182px; pointer-events: none; }
+.s-tray { position: absolute; left: 1320px; top: 580px; width: 256px; pointer-events: none; }
+.sg-1 { left: 268px; top: 300px; width: 240px; height: 100px; }
+.sg-2 { left: 1240px; top: 660px; width: 220px; height: 96px; }
+.sg-3 { left: 780px; top: 20px; width: 160px; height: 80px; }
 
 /* ------------------------------------------------------------- pill nav -- */
 
@@ -626,7 +626,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
    doodles moved to clear it; the tray had the corner the trail needed.
    ========================================================================== */
 
-.s-trail { left: 730px; top: 636px; width: 420px; }
+.s-trail { left: 800px; top: 596px; width: 420px; }
 .s-trail-card { display: block; position: relative; padding-bottom: 14px; }
 .s-trail .spot-card { --rot: 0.9deg; }
 .trail-line { width: 100%; height: auto; display: block; margin: 0 0 4px; }
@@ -646,3 +646,44 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 }
 .trail-entry h3 { margin: 4px 0 6px; }
 .trail-entry p { font-size: var(--t-small); margin: 0; }
+
+
+/* ==========================================================================
+   Stickers
+   Decoration, and the only thing on the board that is about the person rather
+   than the system. They sit in the gutters between objects — the strips a real
+   board fills with whatever was in the drawer — so they cost the layout almost
+   nothing. Decorative throughout: aria-hidden, no pointer events, never in the
+   tab order.
+   ========================================================================== */
+
+.sticker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.07));
+  transform: rotate(var(--rot, 0deg));
+}
+
+/* between the hero and the sticky column */
+.st-game      { left: 758px;  top: 190px; width: 76px;  --rot:  -7deg; }
+.st-music     { left: 762px;  top: 276px; width: 72px;  --rot:   5deg; }
+
+/* between the guardrail column and the polaroid */
+.st-scifi     { left: 1088px; top: 272px; width: 78px;  --rot:   6deg; }
+.st-london    { left: 1090px; top: 368px; width: 76px;  --rot:  -5deg; }
+.st-term      { left: 1088px; top: 462px; width: 80px;  --rot:   3deg; }
+
+/* the right edge — travel stickers down the side, as they would be */
+.st-va        { left: 1566px; top: 296px; width: 68px;  --rot:  -8deg; }
+.st-co        { left: 1568px; top: 380px; width: 68px;  --rot:   6deg; }
+.st-tx        { left: 1566px; top: 464px; width: 68px;  --rot:  -4deg; }
+
+/* bottom right, past the end of the trail — where the trail is heading */
+.st-mountains { left: 1250px; top: 660px; width: 152px; --rot:  -2deg; }
+
+/* Phones never see the board, but if the breakpoint ever moves, stickers are
+   the first thing that should go — they are the least load-bearing pixels. */
+@media (max-width: 899px) {
+  .sticker { display: none; }
+}

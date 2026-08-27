@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827j">
-<link rel="stylesheet" href="assets/scene.css?v=20260827j">
+<link rel="stylesheet" href="assets/board.css?v=20260827q">
+<link rel="stylesheet" href="assets/scene.css?v=20260827q">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -272,6 +272,89 @@
       </g>
     </svg>
 
+    <!-- STICKERS — decoration only. Not hotspots, not in the tab order, and
+         hidden from assistive tech: they say something about the person, not
+         about the system. They live in the gutters between board objects. -->
+    <svg class="sticker st-mountains" viewBox="0 0 150 80" aria-hidden="true" focusable="false">
+      <g filter="url(#marker)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+        <path class="f-none s-ink" d="M4 68l34-46 20 26 14-18 26 34"/>
+        <path class="f-none s-ink" d="M62 62l24-34 22 28 16-20 22 32"/>
+        <path class="f-white s-ink" d="M38 22l10 14H28z"/>
+        <path class="f-white s-ink" d="M86 28l9 12h-18z"/>
+        <path class="f-none s-ink" d="M2 68h146"/>
+        <circle class="f-none s-red" cx="124" cy="18" r="9"/>
+      </g>
+    </svg>
+
+    <svg class="sticker st-game" viewBox="0 0 76 62" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2.2" stroke-linejoin="round">
+        <path class="f-white s-ink" d="M18 16h40c10 0 16 10 16 22s-6 16-13 16c-8 0-9-8-17-8H32c-8 0-9 8-17 8-7 0-13-4-13-16s6-22 16-22z"/>
+        <path class="f-none s-ink" stroke-width="2.6" stroke-linecap="round" d="M16 32v12M10 38h12"/>
+        <circle class="f-red" cx="56" cy="34" r="4.5"/>
+        <circle class="f-blue" cx="64" cy="42" r="4.5"/>
+      </g>
+    </svg>
+
+    <svg class="sticker st-music" viewBox="0 0 72 64" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">
+        <path class="f-none s-ink" d="M10 40V32a26 26 0 0 1 52 0v8"/>
+        <path class="f-white s-ink" d="M4 40h14v20H10a6 6 0 0 1-6-6z"/>
+        <path class="f-white s-ink" d="M68 40H54v20h8a6 6 0 0 0 6-6z"/>
+        <path class="f-none s-green" stroke-width="2.6" d="M28 54c0-8 2-12 8-14"/>
+        <circle class="f-green" cx="26" cy="56" r="3.5"/>
+      </g>
+    </svg>
+
+    <svg class="sticker st-scifi" viewBox="0 0 78 70" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+        <circle class="f-white s-ink" cx="40" cy="34" r="20"/>
+        <ellipse class="f-none s-blue" cx="40" cy="36" rx="35" ry="11" transform="rotate(-18 40 36)"/>
+        <path class="f-none s-ink" d="M32 28c4 3 10 3 14 0M34 42c4-3 8-3 12 0"/>
+        <path class="f-none s-red" stroke-width="2" d="M66 10v8M62 14h8M12 56v6M9 59h6"/>
+      </g>
+    </svg>
+
+    <svg class="sticker st-london" viewBox="0 0 76 76" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2.6">
+        <circle class="f-white s-ink" cx="38" cy="38" r="26"/>
+        <circle class="f-none s-red" cx="38" cy="38" r="19"/>
+        <rect class="f-white s-blue" x="6" y="30" width="64" height="16" rx="2"/>
+      </g>
+      <text x="38" y="42.5" text-anchor="middle" font-family="JetBrains Mono, monospace"
+            font-size="9.5" letter-spacing="0.5" class="f-ink">LONDON</text>
+    </svg>
+
+    <svg class="sticker st-term" viewBox="0 0 80 58" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2.2" stroke-linejoin="round">
+        <rect class="f-white s-ink" x="4" y="6" width="72" height="46" rx="4"/>
+        <path class="f-none s-ink" stroke-width="1.8" d="M4 18h72"/>
+        <circle class="f-red" cx="13" cy="12" r="2.6"/>
+        <circle class="f-soft" cx="22" cy="12" r="2.6"/>
+      </g>
+      <text x="14" y="42" font-family="JetBrains Mono, monospace" font-size="17" class="f-ink">&gt;_</text>
+    </svg>
+
+    <svg class="sticker st-va" viewBox="0 0 68 62" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2" stroke-linejoin="round">
+        <path class="f-white s-ink" d="M5 40L38 12l14 5 7 8-9 5 8 6-13 9-40-2z"/>
+        <path class="f-none s-ink" stroke-width="1.6" d="M62 17l3 10-4 5"/>
+      </g>
+      <text x="34" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" class="f-soft">VA</text>
+    </svg>
+
+    <svg class="sticker st-co" viewBox="0 0 68 62" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2" stroke-linejoin="round">
+        <rect class="f-white s-ink" x="8" y="14" width="52" height="28" rx="1.5"/>
+      </g>
+      <text x="34" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" class="f-soft">CO</text>
+    </svg>
+
+    <svg class="sticker st-tx" viewBox="0 0 68 66" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" stroke-width="2" stroke-linejoin="round">
+        <path class="f-white s-ink" d="M12 10h22l2 8h18l4 12-4 10 2 10-8 8-6-6-8 4-6-12-8-2-4-14-6-4z"/>
+      </g>
+      <text x="34" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" class="f-soft">TX</text>
+    </svg>
   </div>
 
   <div class="scrim" id="scrim" hidden></div>
@@ -613,7 +696,7 @@
   </div>
 </footer>
 
-<script src="assets/board.js?v=20260827j" defer></script>
-<script src="assets/scene.js?v=20260827j" defer></script>
+<script src="assets/board.js?v=20260827q" defer></script>
+<script src="assets/scene.js?v=20260827q" defer></script>
 </body>
 </html>

@@ -19,16 +19,15 @@ About ten minutes. No API key, no cloud account, no AI required for the first
 success.
 
 ```bash
-git clone https://github.com/croquebytes/cairn.git
-cd cairn/kit
+unzip cairn-kit.zip && cd cairn-kit
 ./scripts/init.sh "My Vault"
 ```
 
-Or from the download, which unpacks to the same thing:
+Once the repository is public you can clone it instead — the kit lives at
+`kit/` inside it:
 
 ```bash
-unzip cairn-kit.zip && cd cairn-kit
-./scripts/init.sh "My Vault"
+# git clone https://github.com/croquebytes/cairn.git && cd cairn/kit
 ```
 
 `init.sh` names the vault, appends the first chronicle entry, starts a fresh git

@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827e">
-<link rel="stylesheet" href="assets/scene.css?v=20260827e">
+<link rel="stylesheet" href="assets/board.css?v=20260827i">
+<link rel="stylesheet" href="assets/scene.css?v=20260827i">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -289,10 +289,9 @@
       <span class="panel-eyebrow mono">the builder&rsquo;s corner</span>
       <h2 id="t-builder">What&rsquo;s behind this board</h2>
 
-      <p>Cairn isn&rsquo;t a company, and this page isn&rsquo;t a pitch. It&rsquo;s a
-      <strong>work sample</strong> &mdash; the pattern extracted from a knowledge system I
-      built and operate every day, genericized so anyone can run it. The site exists to
-      show how I think and what I ship.</p>
+      <p>Cairn is a <strong>work sample</strong>. The pattern comes out of a knowledge
+      system I built and operate every day, stripped of anything specific to me so that
+      anyone can run it. This page is here to show how I think and what I ship.</p>
 
       <ul class="bstat-list mono" aria-label="The source system, in numbers">
         <li><strong>69</strong> skills in the source system</li>
@@ -303,35 +302,34 @@
 
       <h3>The habits that carried into the kit</h3>
       <ul class="ruled">
-        <li><strong>Writes wait for a human.</strong> The approval gate exists because my
-        first version failed: approvals lived in memory with a ten-minute expiry, so a
-        restart silently dropped them and my phone never saw them. The redesign &mdash;
-        durable files, notification on creation, resolvable from anywhere &mdash; is the
-        one in the kit.</li>
+        <li><strong>Writes wait for a human.</strong> The approval gate exists because
+        my first version failed. Approvals lived in memory with a ten-minute expiry, so a
+        restart dropped them silently and my phone never saw them. What ships in the kit
+        is the redesign: durable files, a notification the moment a request is created,
+        resolvable from anywhere.</li>
         <li><strong>Nothing is ever deleted.</strong> The log is append-only; corrections
         are new entries. An audit trail you can edit isn&rsquo;t an audit trail.</li>
         <li><strong>A skill isn&rsquo;t a prompt.</strong> Every one ships a written
-        procedure, declared parameters, and an acceptance test &mdash; so quality
-        doesn&rsquo;t depend on typing the right words on the right day.</li>
+        procedure, declared parameters, and an acceptance test. Quality stops depending
+        on whether someone typed the right words that day.</li>
         <li><strong>The system reports its own blind spots.</strong> Scheduled checks
-        diagnose stale indexes, capped batches, and gated actions with no approval line
-        &mdash; and flag them instead of waiting to be asked.</li>
+        look for stale indexes, capped batches, and gated actions with no approval line,
+        then raise what they find on their own.</li>
       </ul>
 
       <h3>Before the AI work</h3>
       <p>I ran Microsoft 365 for a ~700-person organization in <strong>GCC High</strong>,
-      under <strong>CMMC and NIST 800-171</strong> &mdash; identity, permissions,
-      compliance, and training people through change. The taped photo on this board is
+      under <strong>CMMC and NIST 800-171</strong>: identity, permissions, compliance,
+      and training people through change. The taped photo on this board is
       where that background and the AI work meet.</p>
 
-      <p class="panel-note annot annot--plain annot--ink">Those are the two halves of
-      putting AI into a business safely &mdash; and the point of this board is that
-      I&rsquo;ve done both.</p>
+      <p class="panel-note">Putting AI into a business safely takes both halves. That is
+      what this board is here to show.</p>
 
       <ul class="footer-links panel-pending">
         <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
         <li><span class="pending">Contact<span class="tag">pending</span></span></li>
-        <li><a href="https://github.com/croquebytes/cairn">GitHub</a></li>
+        <li><span class="pending">GitHub<span class="tag">pending</span></span></li>
       </ul>
     </div>
   </section>
@@ -351,16 +349,16 @@
       </div>
 
       <ul class="ruled ruled--annot">
-        <li><span class="annot">files, not a database</span> &mdash; the whole system is
-        markdown you can read, grep, and version. No export day, ever.</li>
-        <li><span class="annot">AI drafts, a human sends</span> &mdash; anything that
-        writes outward waits at the approval gate. Five words, one governance policy.</li>
-        <li><span class="annot">nothing is ever deleted</span> &mdash; archive, don&rsquo;t
-        destroy. The chronicle is append-only by design.</li>
+        <li><span class="annot">files, not a database</span>&nbsp;&nbsp;The whole system is
+        markdown you can read, grep, and version. There is no export day.</li>
+        <li><span class="annot">AI drafts, a human sends</span>&nbsp;&nbsp;Anything that writes
+        outward stops at the approval gate and waits there.</li>
+        <li><span class="annot">nothing is ever deleted</span>&nbsp;&nbsp;Items move to the
+        archive. The chronicle only ever grows.</li>
       </ul>
 
-      <p class="panel-note">This is the loop I actually run &mdash; the kit ships it as
-      five core skills and two agent roles, ready to tailor.</p>
+      <p class="panel-note">This is the loop I actually run. The kit ships it as five
+      core skills and two agent roles, ready to tailor.</p>
     </div>
   </section>
 
@@ -374,15 +372,14 @@
 
       <p>A zip of markdown files and three shell scripts. Unzip it, run
       <code class="mono">init.sh</code>, and a plain POSIX script validates the vault and
-      prints a health report. The first success involves no model, no key, and no
-      account &mdash; deliberately, so the structure earns trust before any AI touches it.</p>
+      prints a health report. The first success involves no model, no key and no account.
+      That is deliberate. The structure should hold up before any AI touches it.</p>
 
       <pre class="cmd"><span class="prompt">$</span> ./scripts/init.sh
 <span class="prompt">$</span> ./scripts/check.sh   <span class="comment"># exit 0 = healthy vault</span></pre>
 
-      <p class="panel-note">That ten-minute claim isn&rsquo;t copy &mdash; it was tested
-      from a fresh unzip, and <code class="mono">check.sh</code> refuses to package a
-      broken vault.</p>
+      <p class="panel-note">The ten-minute claim was tested from a fresh unzip.
+      <code class="mono">check.sh</code> refuses to package a broken vault.</p>
 
       <p class="panel-actions">
         <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
@@ -399,16 +396,15 @@
       <h2 id="t-skills">Skill catalog</h2>
 
       <p><strong>A skill isn&rsquo;t a prompt.</strong> Every catalog item ships three
-      files &mdash; a written procedure, declared parameters, and an acceptance test
-      &mdash; so deploying it for the next person is configuration, not rework.</p>
+      files: a written procedure, declared parameters, and an acceptance test. Deploying
+      it for the next person is configuration, not rework.</p>
 
       <p>The method comes from the source system, where 69 skills run this way. The kit
-      ships eight of them, genericized: ingestion, curation, health checks, chronicle
+      ships eight of them in generic form: ingestion, curation, health checks, chronicle
       writing, and the rest of the loop&rsquo;s moving parts.</p>
 
-      <p class="panel-note">The acceptance test is the part most people skip &mdash; and
-      the part that makes a skill deployable to a client instead of demoable to a
-      room.</p>
+      <p class="panel-note">The acceptance test is the part that usually gets skipped.
+      It is also the reason a skill survives contact with someone else&rsquo;s data.</p>
 
       <p class="panel-actions">
         <a class="btn btn--ghost" href="the-kit.html#catalog">all eight skills &rarr;</a>
@@ -424,22 +420,21 @@
       <h2 id="t-rules">Guardrails</h2>
 
       <ul class="ruled">
-        <li><strong>Approval gate</strong> &mdash; writes wait for a human, and the wait
-        itself is logged before anything happens. Autonomy earns trust by being
-        interruptible.</li>
-        <li><strong>Health checks</strong> &mdash; a stale routing index, a batch that
-        stopped at a cap and was never finished, two notes that quietly became
-        duplicates, a gated action with no matching approval line. The vault names its
-        own findings rather than waiting to be asked.</li>
-        <li><strong>One vault, many AIs</strong> &mdash; two adapter files sit over one
-        rulebook. A new runtime means a new adapter, not a reorganized vault &mdash;
-        curate once, serve every assistant.</li>
-        <li><strong>Hard limits</strong> &mdash; autonomous skills carry an item cap and
-        an error cap, so a misbehaving run stops itself instead of running away.</li>
+        <li><strong>Approval gate.</strong> Writes wait for a human, and the decision
+        is written to the log before anything happens.</li>
+        <li><strong>Health checks.</strong> A stale routing index. A batch that stopped at
+        a cap and was never finished. Two notes that have quietly become duplicates. A
+        gated action with no matching approval line. The vault reports every one of
+        these.</li>
+        <li><strong>One vault, many AIs.</strong> Two adapter files sit over one rulebook,
+        so adding a runtime means writing an adapter and leaving your knowledge alone.
+        Curate once, serve every assistant.</li>
+        <li><strong>Hard limits.</strong> Autonomous skills carry an item cap and an error
+        cap, so a bad run stops itself early and says where it stopped.</li>
       </ul>
 
-      <p class="panel-note">Every one of these exists because something went wrong once
-      in the source system and I decided it would never go wrong silently again.</p>
+      <p class="panel-note">Each of these exists because something went wrong once in
+      the source system, and I wanted the next failure to be loud.</p>
     </div>
   </section>
 
@@ -489,12 +484,12 @@
       </svg>
 
       <p>Nothing to buy. A tenant already ships a file store with metadata, versioning,
-      permissions, approvals and an audit log &mdash; the pattern lands on what&rsquo;s
-      already licensed.</p>
+      permissions, approvals and an audit log. The pattern runs on what is already
+      licensed.</p>
 
       <p class="panel-note">This mapping is where my two halves meet: running a
       compliance-bound Microsoft 365 environment, and building AI systems with
-      guardrails. It&rsquo;s the same discipline in both directions.</p>
+      guardrails.</p>
 
       <p class="panel-actions">
         <a class="btn btn--ghost" href="in-your-tenant.html">the full mapping &rarr;</a>
@@ -512,14 +507,13 @@
       <blockquote class="panel-quote">The vault is a pattern, not a product. Your
       knowledge should outlive your tools.</blockquote>
 
-      <p>That&rsquo;s why this site sells nothing. The kit is MIT-licensed markdown and
-      shell scripts; the mapping page shows how the same pattern lands on a Microsoft 365
-      tenant with nothing new to buy. If the tools change next year &mdash; and they will
-      &mdash; the vault doesn&rsquo;t care.</p>
+      <p>That is why this site sells nothing. The kit is MIT-licensed markdown and shell
+      scripts, and the mapping page shows the same pattern running on a Microsoft 365
+      tenant with nothing new to buy. The tools will change next year. The vault will not
+      care.</p>
 
-      <p class="panel-note">It&rsquo;s also why the board you&rsquo;re looking at is a
-      work sample rather than a landing page: the interesting thing was never the
-      product. It&rsquo;s the thinking, written down, in a form you can run.</p>
+      <p class="panel-note">It is also why this board is a work sample. What is worth
+      showing is the thinking, written down in a form you can run.</p>
     </div>
   </section>
 
@@ -534,7 +528,7 @@
   </div>
 </footer>
 
-<script src="assets/board.js?v=20260827e" defer></script>
-<script src="assets/scene.js?v=20260827e" defer></script>
+<script src="assets/board.js?v=20260827i" defer></script>
+<script src="assets/scene.js?v=20260827i" defer></script>
 </body>
 </html>

@@ -128,15 +128,20 @@
   border-radius: 6px;
 }
 
-/* the zoom label — appears on hover/focus, mono and small */
+/* the zoom label — faint at rest so every hotspot is self-labelling, full on
+   hover. It sits just outside the card so it can never cover the card's own
+   last line. */
 .spot-zoom {
   position: absolute;
-  right: 10px;
-  bottom: 8px;
+  right: 2px;
+  bottom: -17px;
   opacity: 0;
   transition: opacity var(--micro) ease-out;
   pointer-events: none;
+  white-space: nowrap;
 }
+/* the loop strip already carries a right-aligned annotation */
+.s-loop .spot-zoom { right: auto; left: 0; }
 .spot:hover .spot-zoom,
 .spot:focus-visible .spot-zoom { opacity: 1; }
 
@@ -199,7 +204,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 }
 
 /* kit sticky */
-.s-kit { left: 830px; top: 96px; width: 232px; }
+.s-kit { left: 826px; top: 92px; width: 238px; }
 .s-kit .note { padding: 18px; }
 .s-kit .note-title { font-size: 19px; display: block; margin-bottom: 6px; }
 
@@ -295,12 +300,12 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 .s-loop-note { position: absolute; right: 0; bottom: -6px; }
 
 /* skills sticky */
-.s-skills { left: 830px; top: 246px; width: 232px; }
+.s-skills { left: 856px; top: 250px; width: 220px; }
 .s-skills .note { padding: 18px; }
 .s-skills .note-title { font-size: 19px; display: block; margin-bottom: 6px; }
 
 /* guardrail cluster — three small stickies, slightly shingled */
-.s-rules { left: 830px; top: 396px; width: 244px; }
+.s-rules { left: 812px; top: 402px; width: 256px; }
 .s-rules-stack { display: grid; gap: 10px; }
 .mini-note { display: block; padding: 12px 14px; }
 .mini-note .note-title { font-size: 15px; display: block; margin-bottom: 2px; }
@@ -573,4 +578,40 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
      seven chips sitting between the reader and the headline, so they go. The
      document below is linear and every section is already on the page. */
   .map { display: none; }
+}
+
+
+/* ==========================================================================
+   Board feel
+   The objects are pinned, not laid out. Rotation is what says so — at board
+   scale the shared 1-2deg from board.css reads as "almost straight", which
+   looks like a misaligned grid rather than a hand on a whiteboard. These are
+   per-object so no two neighbours lean the same way.
+   ========================================================================== */
+
+.s-kit       .spot-card { --rot:  2.4deg; }
+.s-skills    .spot-card { --rot: -2.8deg; }
+.s-rules     .spot-card { --rot:  1.4deg; }
+.s-builder   .spot-card { --rot: -1.6deg; }
+.s-m365      .spot-card { --rot:  1.8deg; }
+.s-principle .spot-card { --rot: -2.2deg; }
+.s-rules .mini-note:nth-child(1) { --rot: -1.2deg; }
+.s-rules .mini-note:nth-child(2) { --rot:  1.6deg; }
+.s-rules .mini-note:nth-child(3) { --rot: -0.8deg; }
+.s-rules .mini-note { transform: rotate(var(--rot, 0deg)); }
+
+/* ==========================================================================
+   Resting affordance
+   The whole interaction is "click a note". Until now nothing said so until
+   the pointer was already on it, which leaves keyboard and first-time
+   visitors guessing. The zoom label now sits faint at rest and comes up on
+   hover, so every hotspot is self-labelling.
+   ========================================================================== */
+
+.spot-zoom { opacity: 0.4; }
+.spot:hover .spot-zoom,
+.spot:focus-visible .spot-zoom { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spot-zoom { opacity: 0.55; transition: none; }
 }

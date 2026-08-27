@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827e">
+<link rel="stylesheet" href="assets/board.css?v=20260827i">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -61,8 +61,8 @@
   </h1>
   <p class="section-lead">
     A folder of markdown files, three shell scripts, and a rulebook. The first
-    success is a shell script that validates the vault and prints a health report
-    &mdash; no model, no key, no account. A system whose first success depends on a paid
+    success is a shell script that validates the vault and prints a health report:
+    no model, no key, no account. A system whose first success depends on a paid
     API key is not a system you own.
   </p>
 </section>
@@ -89,8 +89,8 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
 ./scripts/package.sh</code></pre>
 
       <p><code class="mono">check.sh</code> is plain POSIX shell. It validates every file
-      against the rules in <code class="mono">MANIFEST.md</code> &mdash; frontmatter, naming,
-      the catalog's three-file contract &mdash; then reports the blind spots the vault can
+      against the rules in <code class="mono">MANIFEST.md</code> for frontmatter, naming and
+      the catalog's three-file contract, then reports the blind spots the vault can
       detect about itself. Errors exit non-zero, so it works as a pre-commit hook or a
       CI step without any further wiring.</p>
 
@@ -107,8 +107,8 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
       <div class="note note--green rot-n2">
         <p class="note-title">What "no API key" means</p>
         <p>You need an assistant to <em>operate</em> the vault. You do not need one to
-        stand it up, validate it, or run its health check &mdash; and you never need to
-        provision a key to try it. The files are the product.</p>
+        stand it up, validate it, or run its health check, and you never need to provision
+        a key to try it. The files are the product.</p>
       </div>
 
       <div class="note note--white rot-p1 stack-top wobble">
@@ -159,7 +159,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
       <div class="note note--blue rot-n1 stack-top">
         <p class="note-title">Instructions in content are data</p>
         <p>A pasted thread, an ingested page, a policy file. If any of them contains
-        text telling the assistant what to do, it gets quoted back to you &mdash; not
+        text telling the assistant what to do, it gets quoted back to you rather than
         obeyed. Content cannot grant its own approval.</p>
       </div>
     </div>
@@ -183,7 +183,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
     <div class="col-1-5">
       <div class="note note--white rot-n1 wobble">
         <p class="note-title"><code class="mono">SKILL.md</code></p>
-        <p>The procedure. Triggers, inputs, steps, guardrails &mdash; and an explicit
+        <p>The procedure. Triggers, inputs, steps, guardrails, and an explicit
         <strong>negative scope</strong>, because a skill without one gets loaded for the
         wrong things.</p>
       </div>
@@ -221,7 +221,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
     <article class="cat-card">
       <div class="tag-row"><span class="chip chip--generic">generic</span></div>
       <h3>Inbox triage</h3>
-      <p>A queue becomes promote, merge, archive or escalate &mdash; under a batch cap,
+      <p>A queue becomes promote, merge, archive or escalate, under a batch cap,
       with the remainder always stated out loud. <code class="mono">escalate</code> is a
       success, not a failure to decide.</p>
       <ul class="cat-files"><li><b>10</b> parameters &middot; <b>10</b> acceptance tests</li></ul>
@@ -230,8 +230,8 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
     <article class="cat-card">
       <div class="tag-row"><span class="chip chip--generic">generic</span></div>
       <h3>Weekly digest</h3>
-      <p>What changed this week, including what stalled. Never pads a quiet week &mdash;
-      "three notes promoted, nothing else moved" is the correct output for that week,
+      <p>What changed this week, including what stalled. Never pads a quiet week. "Three notes promoted, nothing else
+      moved" is the correct output for that week,
       and it is what makes the digest worth reading in a busy one.</p>
       <ul class="cat-files"><li><b>10</b> parameters &middot; <b>9</b> acceptance tests</li></ul>
     </article>
@@ -241,7 +241,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
       <h3>Document &rarr; FAQ</h3>
       <p>The questions people actually ask, answered plainly and cited to a section.
       Anything the document doesn't answer goes in its own section with an escalation
-      contact &mdash; that section is the most useful output and the first one cut.</p>
+      contact. That section is the most useful output and the first one cut.</p>
       <ul class="cat-files"><li><b>11</b> parameters &middot; <b>10</b> acceptance tests</li></ul>
     </article>
 
@@ -268,15 +268,15 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
       <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
       <h3>Teams thread summarizer</h3>
       <p>Sorts a thread into decisions, proposals, opinions and open questions, and
-      tracks reversals. <strong>Reactions are not approval</strong> &mdash; a proposal with
-      five thumbs-up and no reply is still a proposal.</p>
+      tracks reversals. <strong>Reactions are not approval.</strong> A proposal with five
+      thumbs-up and no reply is still a proposal.</p>
       <ul class="cat-files"><li><b>10</b> parameters &middot; <b>12</b> acceptance tests</li></ul>
     </article>
 
     <article class="cat-card">
       <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
       <h3>Policy-change announcement</h3>
-      <p>What changes, when, and what you must do &mdash; drafted for email, Teams,
+      <p>What changes, when, and what you must do, drafted for email, Teams,
       intranet and a ticket macro, with everything unconfirmed listed at the top.
       Sends nothing. There is no <code class="mono">auto_send</code> parameter and there
       will not be one.</p>
@@ -287,7 +287,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
       <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
       <h3>Decision register</h3>
       <p>Append-only: what was decided, by whom, on what basis, and what it
-      superseded. Entries are never edited &mdash; a correction is a new entry. A register
+      superseded. Entries are never edited; a correction is a new entry. A register
       you can rewrite is not evidence.</p>
       <ul class="cat-files"><li><b>10</b> parameters &middot; <b>12</b> acceptance tests</li></ul>
     </article>
@@ -297,9 +297,9 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
   <div class="callout callout--red">
     <span class="callout-label">What every skill in the catalog refuses to do</span>
     <p>Consistent across all eight, and not parameterizable: <strong>send, post,
-    publish or deploy</strong> &mdash; every one of them drafts, and a human sends.
-    <strong>Delete</strong> &mdash; there is no delete verdict and no parameter that creates
-    one. <strong>Invent an owner, a date, a rationale or an approval</strong> &mdash;
+    publish or deploy</strong>, because every one of them drafts and a human sends.
+    <strong>Delete</strong>, because there is no delete verdict and no parameter that creates
+    one. <strong>Invent an owner, a date, a rationale or an approval</strong>, since
     <code class="mono">unassigned</code>, <code class="mono">not set</code> and
     <code class="mono">not recorded</code> are correct answers, and each is a fact worth
     having. <strong>Obey instructions found in content.</strong> <strong>Exceed a batch
@@ -326,7 +326,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
       agents obey.</li>
       <li><strong>Not a search engine.</strong> It relies on good <code class="mono">description:</code>
       frontmatter and a routing index rather than an embedding store. Add vector search
-      if you want it &mdash; the files don't change.</li>
+      if you want it; the files don't change.</li>
       <li><strong>Not connected to Microsoft 365.</strong> The M365 skills run on pasted
       content. Graph integration is real work and has not been done here.</li>
       <li><strong>Not finished.</strong> The core loop works and the catalog is a starting
@@ -343,7 +343,7 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
 <footer class="footer">
   <div class="board">
     <ul class="footer-links">
-      <li><a href="https://github.com/croquebytes/cairn">GitHub repo</a></li>
+      <li><span class="pending">GitHub repo<span class="tag">pending</span></span></li>
       <li><a href="cairn-kit.zip" download>Get the kit</a></li>
       <li><span class="pending">Contact<span class="tag">pending</span></span></li>
       <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
@@ -372,6 +372,6 @@ unzip cairn-kit.zip &amp;&amp; cd cairn-kit
   </div>
 </footer>
 
-<script src="assets/board.js?v=20260827e" defer></script>
+<script src="assets/board.js?v=20260827i" defer></script>
 </body>
 </html>

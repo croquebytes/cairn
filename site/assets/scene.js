@@ -23,7 +23,8 @@
   var reduced = window.matchMedia &&
                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var MARGIN   = 18;   /* px of breathing room around the content box */
+  var MARGIN   = 30;   /* px of breathing room around the content box —
+                          tight margins read as clipping, not as fit */
   var ZOOM_MIN = 0.85; /* × fit — a little looser than the resting shot */
   var ZOOM_MAX = 7;    /* × fit */
   var DRAG_SLOP = 5;   /* px before a press becomes a pan instead of a click */

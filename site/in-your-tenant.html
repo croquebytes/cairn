@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827e">
+<link rel="stylesheet" href="assets/board.css?v=20260827i">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -61,7 +61,7 @@
   </h1>
   <p class="section-lead">
     The vault is a pattern, not a product. Microsoft 365 already ships a file store
-    with metadata, versioning, permissions, and audit &mdash; the pattern turns what a
+    with metadata, versioning, permissions, and audit. The pattern turns what a
     tenant already owns into an AI-operable knowledge system. Nothing to buy is the
     strongest pitch there is.
   </p>
@@ -74,7 +74,7 @@
     <h2 class="rot-p1">Every part of the vault already has a name here</h2>
     <p class="section-lead">
       The landing page carries the short version. This is the whole thing. Read it
-      as a translation, not a migration &mdash; nothing on the right is a product you
+      as a translation rather than a migration. Nothing on the right is a product you
       have to go and buy.
     </p>
   </div>
@@ -91,12 +91,12 @@
       </thead>
       <tbody>
         <tr><td>Markdown files as source of truth</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>.md files in a SharePoint document library, or a OneDrive folder</td></tr>
-        <tr><td>YAML frontmatter</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint metadata columns &mdash; indexed, filterable, flow-triggerable</td></tr>
+        <tr><td>YAML frontmatter</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint metadata columns: indexed, filterable, flow-triggerable</td></tr>
         <tr><td>Append-only chronicle and logs</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>A SharePoint list with versioning, plus the Purview unified audit log</td></tr>
-        <tr><td>Git history</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint version history &mdash; native, per file, already on</td></tr>
+        <tr><td>Git history</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint version history: native, per file, already on</td></tr>
         <tr><td>MOC routing index</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>A SharePoint list or index page; queryable through Graph</td></tr>
         <tr><td>Skills catalog</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>A document library of skill packages, with metadata for tier and params</td></tr>
-        <tr><td>Approval gate before writes</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Power Automate approvals &mdash; the card lands in Teams</td></tr>
+        <tr><td>Approval gate before writes</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Power Automate approvals; the card lands in Teams</td></tr>
         <tr><td>Scheduler and heartbeat</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Scheduled flows plus a run-log list</td></tr>
         <tr><td>Mailbox / atomic handoff</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>List items with claim semantics, or Planner tasks</td></tr>
         <tr><td>Permission tiers</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Entra groups, site and library permissions, Conditional Access</td></tr>
@@ -108,7 +108,7 @@
   <div class="callout callout--red">
     <span class="callout-label">What this page is not claiming</span>
     <p>The kit does not connect to a tenant. Its Microsoft 365 skills run on pasted
-    or exported content today &mdash; a copied Teams thread, a downloaded policy, a
+    or exported content today: a copied Teams thread, a downloaded policy, a
     message-centre item. They are shaped for a tenant, not wired to one.</p>
     <p>Wiring them to live data means a Graph app registration, delegated
     permissions, an admin consent conversation, and a permissions review. That is
@@ -122,7 +122,7 @@
     <span class="section-num">02 &mdash; what you would build with it</span>
     <h2 class="rot-n1">Four that earn their keep first</h2>
     <p class="section-lead">
-      Each one names the vault mechanism it reuses &mdash; which is the point. These
+      Each one names the vault mechanism it reuses. That is the point. These
       are not twelve ideas; they are one system pointed at twelve problems.
     </p>
   </div>
@@ -156,7 +156,7 @@
       </svg>
       <h3>Curate once, serve both</h3>
       <p>Index the vault through a Graph connector and Copilot and Claude answer
-      from the same curated source. Clients ask "Copilot or Claude?" &mdash; the vault
+      from the same curated source. Clients ask "Copilot or Claude?" The vault
       answer is that this is a runtime choice, not a knowledge choice. The adapter
       story at tenant scale.</p>
       <span class="reuses">reuses: CLAUDE.md / AGENTS.md adapters, MOC routing</span>
@@ -227,7 +227,7 @@
     <div class="col-1-8 prose">
       <h3>Obsidian, pointed at a synced folder</h3>
       <p>The honest first answer: you don't abandon the tool, you move custody. Same
-      interface, same graph view, same plugins &mdash; but the vault now lives where DLP,
+      interface, same graph view, same plugins. But the vault now lives where DLP,
       retention, versioning and backup apply to it.</p>
 
       <h3>VS Code</h3>
@@ -269,7 +269,7 @@
     <span class="callout-label">Where to start</span>
     <p>Take one engagement, one shared mailbox, or one policy set. Stand the vault up
     there, run it for a month, and read the chronicle at the end of it. The pattern
-    either earned its place in that month or it did not &mdash; and the log is what tells
+    either earned its place in that month or it did not, and the log is what tells
     you which, rather than anyone's impression.</p>
   </div>
 
@@ -281,7 +281,7 @@
 <footer class="footer">
   <div class="board">
     <ul class="footer-links">
-      <li><a href="https://github.com/croquebytes/cairn">GitHub repo</a></li>
+      <li><span class="pending">GitHub repo<span class="tag">pending</span></span></li>
       <li><a href="cairn-kit.zip" download>Get the kit</a></li>
       <li><span class="pending">Contact<span class="tag">pending</span></span></li>
       <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
@@ -310,6 +310,6 @@
   </div>
 </footer>
 
-<script src="assets/board.js?v=20260827e" defer></script>
+<script src="assets/board.js?v=20260827i" defer></script>
 </body>
 </html>

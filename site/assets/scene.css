@@ -27,7 +27,7 @@
   position: absolute;
   top: 0; left: 0;
   width: 1600px;
-  height: 760px;
+  height: 800px;
   transform-origin: 0 0;
   transition: transform 680ms var(--ease-out);
   will-change: transform;
@@ -344,8 +344,8 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 .s-cite { color: var(--ink-soft); }
 
 /* doodles + tray + ghosts */
-.s-doodles { position: absolute; left: 530px; top: 560px; width: 200px; pointer-events: none; }
-.s-tray { position: absolute; left: 1096px; top: 656px; width: 256px; pointer-events: none; }
+.s-doodles { position: absolute; left: 508px; top: 596px; width: 182px; pointer-events: none; }
+.s-tray { position: absolute; left: 1200px; top: 604px; width: 256px; pointer-events: none; }
 .sg-1 { left: 286px; top: 320px; width: 240px; height: 100px; }
 .sg-2 { left: 860px; top: 636px; width: 220px; height: 96px; }
 .sg-3 { left: 764px; top: 22px; width: 160px; height: 80px; }
@@ -615,3 +615,34 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 @media (prefers-reduced-motion: reduce) {
   .spot-zoom { opacity: 0.55; transition: none; }
 }
+
+
+/* ==========================================================================
+   The trail — the experience timeline
+   Re-homed from the patch's coordinates: it was written against the 1600x1000
+   board and placed at y=752, which is off the content box now that the board
+   is 1600x800. It sits bottom-centre-right instead, running left to right so
+   the tallest cairn ("now") points toward the builder's corner. The tray and
+   doodles moved to clear it; the tray had the corner the trail needed.
+   ========================================================================== */
+
+.s-trail { left: 730px; top: 636px; width: 420px; }
+.s-trail-card { display: block; position: relative; padding-bottom: 14px; }
+.s-trail .spot-card { --rot: 0.9deg; }
+.trail-line { width: 100%; height: auto; display: block; margin: 0 0 4px; }
+
+/* trail panel entries */
+.trail-entries { margin: 0 0 var(--u2); }
+.trail-entry {
+  padding: var(--u2) 0;
+  border-bottom: 1px dashed var(--dot);
+}
+.trail-entry:last-child { border-bottom: 0; }
+.trail-when {
+  display: block;
+  color: var(--ink-blue-text);
+  letter-spacing: 0.1em;
+  font-size: 11.5px;
+}
+.trail-entry h3 { margin: 4px 0 6px; }
+.trail-entry p { font-size: var(--t-small); margin: 0; }

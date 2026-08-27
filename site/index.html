@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827i">
-<link rel="stylesheet" href="assets/scene.css?v=20260827i">
+<link rel="stylesheet" href="assets/board.css?v=20260827j">
+<link rel="stylesheet" href="assets/scene.css?v=20260827j">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -200,6 +200,32 @@
     </button>
 
     <!-- PRINCIPLE — the torn page -->
+    <!-- TRAIL — the experience timeline, drawn on the board -->
+    <button class="spot s-trail" data-panel="trail" aria-label="Timeline drawn on the board &mdash; the builder&#39;s experience">
+      <span class="spot-card s-trail-card">
+        <span class="s-loop-title mono">the trail so far</span>
+        <svg class="trail-line" viewBox="0 0 400 74" aria-hidden="true" focusable="false">
+          <g filter="url(#marker)">
+            <path class="s-ink f-none" stroke-width="2.4" stroke-linecap="round" d="M8 50c80-8 180-4 240-8 60-4 100-6 144-4"/>
+          </g>
+          <g filter="url(#marker-fine)" class="f-white s-ink" stroke-width="1.8" stroke-linejoin="round">
+            <ellipse cx="34"  cy="44" rx="12" ry="4.5"/><ellipse cx="34"  cy="37" rx="8" ry="3.5"/><ellipse cx="34" cy="31" rx="5" ry="2.6"/>
+            <ellipse cx="146" cy="42" rx="12" ry="4.5"/><ellipse cx="146" cy="35" rx="8" ry="3.5"/>
+            <ellipse cx="256" cy="40" rx="12" ry="4.5"/><ellipse cx="256" cy="33" rx="8" ry="3.5"/><ellipse cx="256" cy="27" rx="5" ry="2.6"/>
+            <ellipse cx="364" cy="38" rx="12" ry="4.5"/><ellipse cx="364" cy="31" rx="8" ry="3.5"/><ellipse cx="364" cy="25" rx="5" ry="2.6"/><ellipse cx="364" cy="20" rx="3" ry="2"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle" class="f-soft">
+            <text x="34" y="68">2018</text>
+            <text x="146" y="66">2020</text>
+            <text x="256" y="64">2021</text>
+            <text x="364" y="62">now</text>
+          </g>
+        </svg>
+        <span class="spot-line">enterprise M365 &rarr; remote ops &rarr; independent &rarr; AI systems</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
     <button class="spot s-principle" data-panel="principle" aria-label="Torn notebook page — the Cairn principle">
       <span class="spot-card">
         <span class="tape tape--top"></span>
@@ -261,6 +287,7 @@
 <!-- pill nav — always present; anchors without JS, camera controls with it -->
 <nav class="map board" aria-label="Board sections">
   <a class="pill" href="#panel-builder" data-panel="builder">The builder</a>
+  <a class="pill" href="#panel-trail" data-panel="trail">Experience</a>
   <a class="pill" href="#panel-loop" data-panel="loop">How it works</a>
   <a class="pill" href="#panel-kit" data-panel="kit">Starter kit</a>
   <a class="pill" href="#panel-skills" data-panel="skills">Skill catalog</a>
@@ -331,6 +358,64 @@
         <li><span class="pending">Contact<span class="tag">pending</span></span></li>
         <li><span class="pending">GitHub<span class="tag">pending</span></span></li>
       </ul>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-trail" tabindex="-1" aria-labelledby="t-trail">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the trail markers</span>
+      <h2 id="t-trail">The trail so far</h2>
+
+      <p>Cairns mark a trail. These are mine: the experience this board stands on, and
+      why it points where it points.</p>
+
+      <div class="trail-entries">
+        <div class="trail-entry">
+          <span class="trail-when mono">2018 &ndash; 2021</span>
+          <h3>Enterprise Microsoft 365, defense sector</h3>
+          <p>Ran Microsoft 365 <strong>GCC High</strong> for a ~700-person organization
+          across distributed sites, including overseas. Led the move from on-prem to the
+          cloud and a company-wide device refresh, and lived under <strong>CMMC and NIST
+          800-171</strong> daily: identity, permissions, segmented networks, and the
+          documentation to prove all of it. Built the SharePoint hubs people actually
+          used, and trained every kind of user through the change.</p>
+        </div>
+        <div class="trail-entry">
+          <span class="trail-when mono">2020 &ndash; 2021</span>
+          <h3>Managing it all remotely</h3>
+          <p>The cloud move and refresh landed shortly before COVID, so going remote was
+          a non-event. Then came the real test: managing the same environment, the same
+          sites and the same compliance, fully remote and across time zones. That is the
+          delivery model of the work I&rsquo;m aiming at now, practiced early.</p>
+        </div>
+        <div class="trail-entry">
+          <span class="trail-when mono">2021 &ndash; 2025</span>
+          <h3>Independent building</h3>
+          <p>Websites built and run for clients, and clients taught to run them
+          themselves, which is its own discipline. Part-time nonprofit IT. Hosting and
+          running local AI models before it was convenient.</p>
+        </div>
+        <div class="trail-entry">
+          <span class="trail-when mono">2024 &ndash; now</span>
+          <h3>The system behind this board</h3>
+          <p>Built and operate the knowledge system Cairn is extracted from: 69 skills,
+          agent roles with written boundaries, a custom MCP server, tiered permissions,
+          an approval gate, an append-only log. The receipts are pinned all over this
+          board.</p>
+        </div>
+      </div>
+
+      <h3>What it adds up to</h3>
+      <p>The work I&rsquo;m going for is putting AI inside businesses <em>safely</em>:
+      discovery, identity and permission scoping, governance, user training, and the
+      support that follows. That job has two halves. One is knowing enterprise Microsoft
+      365 under real compliance. The other is knowing what it takes to run AI with
+      guardrails, because you have had to build them. Both halves are on this board.</p>
+
+      <p class="panel-note">What I haven&rsquo;t done yet: deployed this inside someone
+      else&rsquo;s tenant. That is not a footnote. It is the job I want.</p>
     </div>
   </section>
 
@@ -528,7 +613,7 @@
   </div>
 </footer>
 
-<script src="assets/board.js?v=20260827i" defer></script>
-<script src="assets/scene.js?v=20260827i" defer></script>
+<script src="assets/board.js?v=20260827j" defer></script>
+<script src="assets/scene.js?v=20260827j" defer></script>
 </body>
 </html>

@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cairn — a second brain any AI can run, safely</title>
-<meta name="description" content="One builder's working knowledge system, genericized into a pattern and a kit. Plain markdown as the source of truth, guardrails and human approvals built in — published as a work sample, not a product.">
+<meta name="description" content="One builder's working knowledge system, pared down to a portable pattern and kit. Plain markdown stays the source of truth, with guardrails and human approvals built in.">
 <meta name="theme-color" content="#FAFAF7">
 <meta property="og:title" content="Cairn — a second brain any AI can run, safely">
 <meta property="og:description" content="Plain files. Clear rules. Packaged skills. No lock-in. A work sample, not a product.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827r">
-<link rel="stylesheet" href="assets/scene.css?v=20260827r">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/board.css?v=20260827s">
+<link rel="stylesheet" href="assets/scene.css?v=20260827w">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -75,7 +75,7 @@
         <span class="circled">safely.<svg viewBox="0 0 400 130" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M196 8C112 5 34 22 16 52c-18 30 34 62 148 68 106 6 218-14 233-46 13-28-52-56-160-63-38-2-77-1-112 3"/></svg></span>
       </h1>
       <p class="hero-sub">Plain files. Clear rules. Packaged skills. <span class="nowrap">No lock-in.</span></p>
-      <p class="s-hero-note annot annot--plain annot--ink">Built and run daily by one person.
+      <p class="s-hero-note annot annot--plain annot--ink">Built by one person and used every day.
         This board is a work sample, not a storefront.</p>
       <div class="hero-cta">
         <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
@@ -237,27 +237,6 @@
       </span>
     </button>
 
-    <!-- doodles: coffee + cairn, bottom-left -->
-    <svg class="s-doodles" viewBox="0 0 270 210" aria-hidden="true" focusable="false">
-      <g filter="url(#marker)">
-        <g class="doodle-late f-none s-ink" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M24 118h42l-4 39c-1 9-14 13-21 12-7-1-12-5-13-12z" class="f-white"/>
-          <path d="M66 126c11 0 13 18 1 20"/>
-        </g>
-        <g class="doodle-late f-none s-red" stroke-width="2.4" stroke-linecap="round">
-          <path d="M36 108c4-7-3-12 1-19"/>
-          <path d="M46 108c4-8-3-13 1-20"/>
-          <path d="M56 108c4-7-3-12 1-18"/>
-        </g>
-        <g class="f-white s-ink" stroke-width="2.4" stroke-linejoin="round">
-          <path class="stone stone--1" d="M103 167c2-9 22-16 53-15 32 1 52 8 51 17-1 9-22 15-53 14-31-1-52-7-51-16z"/>
-          <path class="stone stone--2" d="M114 144c2-8 17-14 41-13 24 1 39 7 38 15-1 8-17 13-40 12-23-1-40-6-39-14z"/>
-          <path class="stone stone--3" d="M124 123c2-7 13-12 32-11 18 1 29 6 28 13-1 7-14 11-31 10-17-1-30-5-29-12z"/>
-          <path class="stone stone--4" d="M135 104c1-6 9-10 21-9 12 1 19 5 18 11-1 6-10 9-20 8-11-1-20-4-19-10z"/>
-        </g>
-      </g>
-    </svg>
-
     <!-- marker tray, drawn on the board's bottom edge -->
     <svg class="s-tray" viewBox="0 0 240 62" aria-hidden="true" focusable="false">
       <g filter="url(#marker-fine)" class="s-ink" stroke-width="2" stroke-linejoin="round">
@@ -275,86 +254,97 @@
     <!-- STICKERS — decoration only. Not hotspots, not in the tab order, and
          hidden from assistive tech: they say something about the person, not
          about the system. They live in the gutters between board objects. -->
-    <svg class="sticker st-mountains" viewBox="0 0 150 80" aria-hidden="true" focusable="false">
-      <g filter="url(#marker)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-        <path class="f-none s-ink" d="M4 68l34-46 20 26 14-18 26 34"/>
-        <path class="f-none s-ink" d="M62 62l24-34 22 28 16-20 22 32"/>
-        <path class="f-white s-ink" d="M38 22l10 14H28z"/>
-        <path class="f-white s-ink" d="M86 28l9 12h-18z"/>
-        <path class="f-none s-ink" d="M2 68h146"/>
-        <circle class="f-none s-red" cx="124" cy="18" r="9"/>
+    <img class="sticker sticker-raster sticker-backdrop st-topo"
+         src="assets/stickers/sticker-topo-paper-v1.png" width="1200" height="554"
+         alt="" aria-hidden="true" loading="eager" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster sticker-backdrop st-wayfinder"
+         src="assets/stickers/sticker-wayfinder-v1.png" width="512" height="501"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster sticker-underlay st-coffee"
+         src="assets/stickers/sticker-coffee-v1.png" width="640" height="571"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster sticker-underlay st-cairn"
+         src="assets/stickers/sticker-cairn-v1.png" width="517" height="640"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster st-mountains"
+         src="assets/stickers/sticker-mountains-v1.png" width="960" height="436"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster st-game"
+         src="assets/stickers/sticker-game-controller-v1.png" width="640" height="640"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster st-music"
+         src="assets/stickers/sticker-headphones-v1.png" width="640" height="640"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <img class="sticker sticker-raster st-scifi"
+         src="assets/stickers/sticker-orbit-face-v1.png" width="640" height="640"
+         alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+
+    <span class="sticker sticker-composite st-london" aria-hidden="true">
+      <img class="sticker-art" src="assets/stickers/sticker-london-v1.png"
+           width="640" height="612" alt="" loading="lazy" decoding="async" draggable="false">
+      <span class="sticker-label">London</span>
+    </span>
+
+    <span class="sticker sticker-composite st-term" aria-hidden="true">
+      <img class="sticker-art" src="assets/stickers/sticker-terminal-v1.png"
+           width="720" height="603" alt="" loading="lazy" decoding="async" draggable="false">
+      <span class="sticker-label">&gt;_</span>
+    </span>
+
+    <svg class="sticker sticker-route st-travel-loop" viewBox="0 0 140 320"
+         aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="travel-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M1 1l8 4-8 4" fill="none" stroke="var(--ink-blue)"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="travel-arrow-green" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M1 1l8 4-8 4" fill="none" stroke="var(--ink-green)"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="travel-arrow-red" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M1 1l8 4-8 4" fill="none" stroke="var(--ink-red)"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <g filter="url(#marker-fine)" fill="none" stroke-width="3.2"
+         stroke-linecap="round" stroke-linejoin="round">
+        <path class="route-to-co" marker-end="url(#travel-arrow-blue)"
+              d="M40 70c-21 14-33 49-17 73"/>
+        <path class="route-to-tx" marker-end="url(#travel-arrow-green)"
+              d="M26 171c-17 19-13 53 12 77"/>
+        <path class="route-to-va" marker-end="url(#travel-arrow-red)"
+              d="M130 258c12-38 6-88 8-128 3-38 5-68-6-82"/>
       </g>
     </svg>
 
-    <svg class="sticker st-game" viewBox="0 0 76 62" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2.2" stroke-linejoin="round">
-        <path class="f-white s-ink" d="M18 16h40c10 0 16 10 16 22s-6 16-13 16c-8 0-9-8-17-8H32c-8 0-9 8-17 8-7 0-13-4-13-16s6-22 16-22z"/>
-        <path class="f-none s-ink" stroke-width="2.6" stroke-linecap="round" d="M16 32v12M10 38h12"/>
-        <circle class="f-red" cx="56" cy="34" r="4.5"/>
-        <circle class="f-blue" cx="64" cy="42" r="4.5"/>
-      </g>
-    </svg>
+    <span class="sticker sticker-composite st-va" aria-hidden="true">
+      <img class="sticker-art" src="assets/stickers/sticker-virginia-v1.png"
+           width="720" height="372" alt="" loading="lazy" decoding="async" draggable="false">
+      <span class="sticker-label">VA</span>
+    </span>
 
-    <svg class="sticker st-music" viewBox="0 0 72 64" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">
-        <path class="f-none s-ink" d="M10 40V32a26 26 0 0 1 52 0v8"/>
-        <path class="f-white s-ink" d="M4 40h14v20H10a6 6 0 0 1-6-6z"/>
-        <path class="f-white s-ink" d="M68 40H54v20h8a6 6 0 0 0 6-6z"/>
-        <path class="f-none s-green" stroke-width="2.6" d="M28 54c0-8 2-12 8-14"/>
-        <circle class="f-green" cx="26" cy="56" r="3.5"/>
-      </g>
-    </svg>
+    <span class="sticker sticker-composite st-co" aria-hidden="true">
+      <img class="sticker-art" src="assets/stickers/sticker-colorado-v1.png"
+           width="720" height="431" alt="" loading="lazy" decoding="async" draggable="false">
+      <span class="sticker-label">CO</span>
+    </span>
 
-    <svg class="sticker st-scifi" viewBox="0 0 78 70" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
-        <circle class="f-white s-ink" cx="40" cy="34" r="20"/>
-        <ellipse class="f-none s-blue" cx="40" cy="36" rx="35" ry="11" transform="rotate(-18 40 36)"/>
-        <path class="f-none s-ink" d="M32 28c4 3 10 3 14 0M34 42c4-3 8-3 12 0"/>
-        <path class="f-none s-red" stroke-width="2" d="M66 10v8M62 14h8M12 56v6M9 59h6"/>
-      </g>
-    </svg>
-
-    <svg class="sticker st-london" viewBox="0 0 76 76" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2.6">
-        <circle class="f-white s-ink" cx="38" cy="38" r="26"/>
-        <circle class="f-none s-red" cx="38" cy="38" r="19"/>
-        <rect class="f-white s-blue" x="6" y="30" width="64" height="16" rx="2"/>
-      </g>
-      <text x="38" y="42.5" text-anchor="middle" font-family="JetBrains Mono, monospace"
-            font-size="9.5" letter-spacing="0.5" class="f-ink">LONDON</text>
-    </svg>
-
-    <svg class="sticker st-term" viewBox="0 0 80 58" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2.2" stroke-linejoin="round">
-        <rect class="f-white s-ink" x="4" y="6" width="72" height="46" rx="4"/>
-        <path class="f-none s-ink" stroke-width="1.8" d="M4 18h72"/>
-        <circle class="f-red" cx="13" cy="12" r="2.6"/>
-        <circle class="f-soft" cx="22" cy="12" r="2.6"/>
-      </g>
-      <text x="14" y="42" font-family="JetBrains Mono, monospace" font-size="17" class="f-ink">&gt;_</text>
-    </svg>
-
-    <svg class="sticker st-va" viewBox="0 0 68 62" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2" stroke-linejoin="round">
-        <path class="f-white s-ink" d="M5 40L38 12l14 5 7 8-9 5 8 6-13 9-40-2z"/>
-        <path class="f-none s-ink" stroke-width="1.6" d="M62 17l3 10-4 5"/>
-      </g>
-      <text x="34" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" class="f-soft">VA</text>
-    </svg>
-
-    <svg class="sticker st-co" viewBox="0 0 68 62" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2" stroke-linejoin="round">
-        <rect class="f-white s-ink" x="8" y="14" width="52" height="28" rx="1.5"/>
-      </g>
-      <text x="34" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" class="f-soft">CO</text>
-    </svg>
-
-    <svg class="sticker st-tx" viewBox="0 0 68 66" aria-hidden="true" focusable="false">
-      <g filter="url(#marker-fine)" stroke-width="2" stroke-linejoin="round">
-        <path class="f-white s-ink" d="M12 10h22l2 8h18l4 12-4 10 2 10-8 8-6-6-8 4-6-12-8-2-4-14-6-4z"/>
-      </g>
-      <text x="34" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" class="f-soft">TX</text>
-    </svg>
+    <span class="sticker sticker-composite st-tx" aria-hidden="true">
+      <img class="sticker-art" src="assets/stickers/sticker-texas-v1.png"
+           width="640" height="628" alt="" loading="lazy" decoding="async" draggable="false">
+      <span class="sticker-label">TX</span>
+    </span>
   </div>
 
   <div class="scrim" id="scrim" hidden></div>
@@ -387,7 +377,7 @@
   <section class="doc-hero" aria-label="Introduction">
     <h1>A second brain any AI can run &mdash; safely.</h1>
     <p class="hero-sub">Plain files. Clear rules. Packaged skills. No lock-in.</p>
-    <p class="annot annot--plain annot--ink">Built and run daily by one person. This
+    <p class="annot annot--plain annot--ink">Built by one person and used every day. This
     board is a work sample, not a storefront.</p>
     <p><a class="btn" href="cairn-kit.zip" download>Get the kit</a></p>
   </section>
@@ -399,9 +389,9 @@
       <span class="panel-eyebrow mono">the builder&rsquo;s corner</span>
       <h2 id="t-builder">What&rsquo;s behind this board</h2>
 
-      <p>Cairn is a <strong>work sample</strong>. The pattern comes out of a knowledge
-      system I built and operate every day, stripped of anything specific to me so that
-      anyone can run it. This page is here to show how I think and what I ship.</p>
+      <p>Cairn is a <strong>work sample, not a company</strong>. It grew out of a knowledge
+      system I built and use every day. I pared away the personal parts so anyone can
+      run the pattern and inspect the decisions behind it.</p>
 
       <ul class="bstat-list mono" aria-label="The source system, in numbers">
         <li><strong>69</strong> skills in the source system</li>
@@ -433,8 +423,8 @@
       and training people through change. The taped photo on this board is
       where that background and the AI work meet.</p>
 
-      <p class="panel-note">Putting AI into a business safely takes both halves. That is
-      what this board is here to show.</p>
+      <p class="panel-note">I know the enterprise constraints, and I&rsquo;ve built the AI
+      side by hand. This board puts the two in the same place.</p>
 
       <ul class="footer-links panel-pending">
         <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
@@ -491,14 +481,13 @@
       </div>
 
       <h3>What it adds up to</h3>
-      <p>The work I&rsquo;m going for is putting AI inside businesses <em>safely</em>:
-      discovery, identity and permission scoping, governance, user training, and the
-      support that follows. That job has two halves. One is knowing enterprise Microsoft
-      365 under real compliance. The other is knowing what it takes to run AI with
-      guardrails, because you have had to build them. Both halves are on this board.</p>
+      <p>The work I want next is AI delivery inside real businesses: discovery,
+      identity and permission scoping, governance, user training, and the support after
+      launch. My Microsoft 365 years taught me the constraints. Building Cairn taught me
+      where AI systems fail at the edges, and how to put those edges in writing.</p>
 
-      <p class="panel-note">What I haven&rsquo;t done yet: deployed this inside someone
-      else&rsquo;s tenant. That is not a footnote. It is the job I want.</p>
+      <p class="panel-note">I haven&rsquo;t yet deployed this inside someone else&rsquo;s tenant.
+      I&rsquo;m saying that plainly because it is the gap I want the next job to close.</p>
     </div>
   </section>
 

@@ -110,6 +110,7 @@
 
 .spot {
   position: absolute;
+  z-index: 3;
   display: block;
   padding: 0;
   margin: 0;
@@ -177,7 +178,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 /* ----------------------------------------------- objects on the board ---- */
 
 /* hero scrawl — static thesis, top-left */
-.s-hero { position: absolute; left: 40px; top: 40px; width: 700px; }
+.s-hero { position: absolute; left: 40px; top: 40px; width: 700px; z-index: 3; }
 .s-hero h1 {
   font-size: 74px;
   line-height: 1.02;
@@ -343,8 +344,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 }
 .s-cite { color: var(--ink-soft); }
 
-/* doodles + tray + ghosts */
-.s-doodles { position: absolute; left: 508px; top: 556px; width: 182px; pointer-events: none; }
+/* tray + ghosts */
 .s-tray { position: absolute; left: 1320px; top: 580px; width: 256px; pointer-events: none; }
 .sg-1 { left: 268px; top: 300px; width: 240px; height: 100px; }
 .sg-2 { left: 1240px; top: 660px; width: 220px; height: 96px; }
@@ -555,7 +555,10 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 @media (max-width: 899px) {
   .stage, .zoomui { display: none !important; }
 
-  .js .doc-hero { display: block; }
+  .js .doc-hero {
+    display: block;
+    padding-inline: var(--gutter);
+  }
 
   .js .panels { padding-block: var(--u6); }
   .js .panel {
@@ -664,23 +667,97 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.07));
   transform: rotate(var(--rot, 0deg));
 }
+.sticker-raster {
+  display: block;
+  height: auto;
+  user-select: none;
+}
+.sticker-composite { display: block; }
+.sticker-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+.sticker-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.sticker-backdrop {
+  z-index: 0;
+  filter: none;
+}
+.sticker-underlay { z-index: 1; }
 
-/* between the hero and the sticky column */
-.st-game      { left: 758px;  top: 190px; width: 76px;  --rot:  -7deg; }
-.st-music     { left: 762px;  top: 276px; width: 72px;  --rot:   5deg; }
+/* A found map fragment under the thesis, plus one bright edge peeking from
+   behind the torn principle note. Both stay quieter than the live content. */
+.st-topo      { left: 6px;    top: 58px;  width: 660px; opacity: 0.30; --rot: -2.4deg; }
+.st-wayfinder { left: 360px;  top: 494px; width: 130px; opacity: 0.72; --rot: 10deg; }
+.st-coffee    { left: 448px;  top: 586px; width: 82px;  --rot: -6deg; }
+.st-cairn     { left: 540px;  top: 588px; width: 112px; --rot:  3deg; }
 
-/* between the guardrail column and the polaroid */
-.st-scifi     { left: 1088px; top: 272px; width: 78px;  --rot:   6deg; }
-.st-london    { left: 1090px; top: 368px; width: 76px;  --rot:  -5deg; }
-.st-term      { left: 1088px; top: 462px; width: 80px;  --rot:   3deg; }
+/* between the hero and the sticky column — deliberately staggered, with one
+   edge of each slipping under a note instead of forming a sticker stack */
+.st-game      { left: 770px;  top: 145px; width: 104px; --rot: -10deg; }
+.st-music     { left: 796px;  top: 294px; width: 100px; --rot:   7deg; }
 
-/* the right edge — travel stickers down the side, as they would be */
-.st-va        { left: 1566px; top: 296px; width: 68px;  --rot:  -8deg; }
-.st-co        { left: 1568px; top: 380px; width: 68px;  --rot:   6deg; }
-.st-tx        { left: 1566px; top: 464px; width: 68px;  --rot:  -4deg; }
+/* between the guardrail column and the polaroid — a loose zig-zag, partially
+   obscured by the functional cards above it */
+.st-scifi     { left: 1050px; top: 220px; width: 112px; --rot:   8deg; }
+.st-london    { left: 1114px; top: 352px; width: 96px;  --rot:  -7deg; }
+.st-london .sticker-label {
+  left: 9%; top: 47%; width: 82%;
+  transform: translateY(-50%);
+  color: var(--board-white);
+  font-size: 9px;
+}
+.st-term      { left: 1060px; top: 484px; width: 100px; --rot:   4deg; }
+.st-term .sticker-label {
+  left: 24%; top: 43%;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+/* the right edge — an imperfect travel stack with a route looping behind it */
+.st-travel-loop {
+  left: 1540px;
+  top: 260px;
+  width: 140px;
+  height: 320px;
+  z-index: 1;
+  opacity: 0.88;
+  filter: none;
+}
+.st-travel-loop .route-to-co { stroke: var(--ink-blue); }
+.st-travel-loop .route-to-tx { stroke: var(--ink-green); }
+.st-travel-loop .route-to-va { stroke: var(--ink-red); }
+.st-va        { left: 1580px; top: 282px; width: 84px;  --rot:  -7deg; }
+.st-va .sticker-label {
+  left: 42%; top: 51%;
+  color: var(--board-white);
+  font-size: 10px;
+}
+.st-co        { left: 1568px; top: 382px; width: 84px;  --rot:   5deg; }
+.st-co .sticker-label {
+  left: 0; top: 61%; width: 100%;
+  color: var(--board-white);
+  font-size: 11px;
+}
+.st-tx        { left: 1582px; top: 482px; width: 78px;  --rot:  -4deg; }
+.st-tx .sticker-label {
+  left: 0; top: 47%; width: 100%;
+  color: var(--board-white);
+  font-size: 11px;
+}
 
 /* bottom right, past the end of the trail — where the trail is heading */
-.st-mountains { left: 1250px; top: 660px; width: 152px; --rot:  -2deg; }
+.st-mountains { left: 1224px; top: 650px; width: 188px; --rot:  -2deg; }
 
 /* Phones never see the board, but if the breakpoint ever moves, stickers are
    the first thing that should go — they are the least load-bearing pixels. */

@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260827s">
-<link rel="stylesheet" href="assets/scene.css?v=20260827w">
+<link rel="stylesheet" href="assets/board.css?v=20260828b">
+<link rel="stylesheet" href="assets/scene.css?v=20260828b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -200,6 +200,15 @@
     </button>
 
     <!-- PRINCIPLE — the torn page -->
+    <!-- ASK ME HOW -->
+    <button class="spot s-ask" data-panel="ask" aria-label="Sticky note &mdash; ask me how, and what this was built with">
+      <span class="note note--blue spot-card">
+        <span class="note-title">Ask me how</span>
+        <span class="spot-line">what it was built with</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
     <!-- TRAIL — the experience timeline, drawn on the board -->
     <button class="spot s-trail" data-panel="trail" aria-label="Timeline drawn on the board &mdash; the builder&#39;s experience">
       <span class="spot-card s-trail-card">
@@ -262,37 +271,37 @@
          src="assets/stickers/sticker-wayfinder-v1.png" width="512" height="501"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <img class="sticker sticker-raster sticker-underlay st-coffee"
+    <img class="sticker sticker-hot sticker-raster sticker-underlay st-coffee" data-note-title="Coffee" data-note="The other thing this board was built with."
          src="assets/stickers/sticker-coffee-v1.png" width="640" height="571"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <img class="sticker sticker-raster sticker-underlay st-cairn"
+    <img class="sticker sticker-hot sticker-raster sticker-underlay st-cairn" data-note-title="Why Cairn" data-note="A stack of stones marking a path so the next person can follow it. That is the whole idea."
          src="assets/stickers/sticker-cairn-v1.png" width="517" height="640"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <img class="sticker sticker-raster st-mountains"
+    <img class="sticker sticker-hot sticker-raster st-mountains" data-note-title="The mountains" data-note="Our favourite place, and the reason Colorado is on this board at all."
          src="assets/stickers/sticker-mountains-v1.png" width="960" height="436"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <img class="sticker sticker-raster st-game"
+    <img class="sticker sticker-hot sticker-raster st-game" data-note-title="Games" data-note="Where a lot of the systems thinking comes from. Rules, state, and what happens when a player does the unexpected."
          src="assets/stickers/sticker-game-controller-v1.png" width="640" height="640"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <img class="sticker sticker-raster st-music"
+    <img class="sticker sticker-hot sticker-raster st-music" data-note-title="Headphones" data-note="Most of this board was built with these on."
          src="assets/stickers/sticker-headphones-v1.png" width="640" height="640"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <img class="sticker sticker-raster st-scifi"
+    <img class="sticker sticker-hot sticker-raster st-scifi" data-note-title="Science fiction" data-note="The genre that got me curious about machines that think, long before it was a job."
          src="assets/stickers/sticker-orbit-face-v1.png" width="640" height="640"
          alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
 
-    <span class="sticker sticker-composite st-london" aria-hidden="true">
+    <span class="sticker sticker-hot sticker-composite st-london" data-note-title="London" data-note="Furthest marker on the trail so far." aria-hidden="true">
       <img class="sticker-art" src="assets/stickers/sticker-london-v1.png"
            width="640" height="612" alt="" loading="lazy" decoding="async" draggable="false">
       <span class="sticker-label">London</span>
     </span>
 
-    <span class="sticker sticker-composite st-term" aria-hidden="true">
+    <span class="sticker sticker-hot sticker-composite st-term" data-note-title="The terminal" data-note="Still where the work happens. The kit is markdown and shell scripts for a reason." aria-hidden="true">
       <img class="sticker-art" src="assets/stickers/sticker-terminal-v1.png"
            width="720" height="603" alt="" loading="lazy" decoding="async" draggable="false">
       <span class="sticker-label">&gt;_</span>
@@ -328,19 +337,19 @@
       </g>
     </svg>
 
-    <span class="sticker sticker-composite st-va" aria-hidden="true">
+    <span class="sticker sticker-hot sticker-composite st-va" data-note-title="Virginia" data-note="Where the enterprise Microsoft 365 years happened." aria-hidden="true">
       <img class="sticker-art" src="assets/stickers/sticker-virginia-v1.png"
            width="720" height="372" alt="" loading="lazy" decoding="async" draggable="false">
       <span class="sticker-label">VA</span>
     </span>
 
-    <span class="sticker sticker-composite st-co" aria-hidden="true">
+    <span class="sticker sticker-hot sticker-composite st-co" data-note-title="Colorado" data-note="The one we keep going back to. Mountains, mostly." aria-hidden="true">
       <img class="sticker-art" src="assets/stickers/sticker-colorado-v1.png"
            width="720" height="431" alt="" loading="lazy" decoding="async" draggable="false">
       <span class="sticker-label">CO</span>
     </span>
 
-    <span class="sticker sticker-composite st-tx" aria-hidden="true">
+    <span class="sticker sticker-hot sticker-composite st-tx" data-note-title="Texas" data-note="Another stop on the map." aria-hidden="true">
       <img class="sticker-art" src="assets/stickers/sticker-texas-v1.png"
            width="640" height="628" alt="" loading="lazy" decoding="async" draggable="false">
       <span class="sticker-label">TX</span>
@@ -361,6 +370,7 @@
 <nav class="map board" aria-label="Board sections">
   <a class="pill" href="#panel-builder" data-panel="builder">The builder</a>
   <a class="pill" href="#panel-trail" data-panel="trail">Experience</a>
+  <a class="pill" href="#panel-ask" data-panel="ask">Ask me how</a>
   <a class="pill" href="#panel-loop" data-panel="loop">How it works</a>
   <a class="pill" href="#panel-kit" data-panel="kit">Starter kit</a>
   <a class="pill" href="#panel-skills" data-panel="skills">Skill catalog</a>
@@ -488,6 +498,75 @@
 
       <p class="panel-note">I haven&rsquo;t yet deployed this inside someone else&rsquo;s tenant.
       I&rsquo;m saying that plainly because it is the gap I want the next job to close.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-ask" tabindex="-1" aria-labelledby="t-ask">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the blue sticky, bottom of the board</span>
+      <h2 id="t-ask">Ask me how</h2>
+
+      <p>Openers, if you want to poke at any of it. Every answer is somewhere on
+      this board or in the kit.</p>
+
+      <ul class="ask-list">
+        <li><span class="ask-q">&ldquo;How do you stop an agent doing something stupid?&rdquo;</span>
+        Caps and a gate. Ten items a batch, three consecutive errors and it stops, no
+        skill calls itself, and anything that sends or writes outward waits for a human.
+        The gate exists because my first version failed and dropped approvals on
+        restart.</li>
+
+        <li><span class="ask-q">&ldquo;How is a skill different from a prompt?&rdquo;</span>
+        Three files instead of one: the procedure, the parameters a deployer edits, and
+        an acceptance test that includes the failure paths and an
+        I-don&rsquo;t-know case. <code class="mono">check.sh</code> treats a missing one
+        as an error.</li>
+
+        <li><span class="ask-q">&ldquo;How would this work in our tenant?&rdquo;</span>
+        Markdown in a document library, frontmatter as metadata columns, approvals
+        through Power Automate, the log as a list with Purview behind it. Nothing new to
+        buy. The mapping page walks the whole table.</li>
+
+        <li><span class="ask-q">&ldquo;How do you know it still works?&rdquo;</span>
+        The system reports its own blind spots: stale routing index, a batch that
+        stopped at a cap and was never finished, gated actions with no approval line.
+        It raises them rather than waiting to be asked.</li>
+
+        <li><span class="ask-q">&ldquo;How did you learn all this?&rdquo;</span>
+        By running it daily and writing down what broke. Every guardrail in the kit
+        traces to a specific failure. The append-only log is what made that possible &mdash;
+        you cannot learn from a history you are allowed to edit.</li>
+      </ul>
+
+      <h3>Built with the vault</h3>
+      <p>This site is not a side project to the system; it came out of it. The board
+      was planned, drafted, and revised through the same loop it describes &mdash;
+      captured to an inbox, curated, operated on by skills, and logged. The copy went
+      through a written anti-slop pass. The claims on it were checked against the source
+      system rather than asserted, and one was removed when the logs would not support
+      it.</p>
+
+      <h3>The stickers, decoded</h3>
+      <p class="panel-note">Hover any sticker on the board for the same line.</p>
+      <ul class="decoded">
+        <li><span class="d-k">why cairn</span><span>A stack of stones marking a path so the next person can follow it. That is the whole idea.</span></li>
+        <li><span class="d-k">the mountains</span><span>Our favourite place, and the reason Colorado is on this board at all.</span></li>
+        <li><span class="d-k">CO</span><span>The one we keep going back to. Mountains, mostly.</span></li>
+        <li><span class="d-k">VA</span><span>Where the enterprise Microsoft 365 years happened.</span></li>
+        <li><span class="d-k">TX</span><span>Another stop on the map.</span></li>
+        <li><span class="d-k">London</span><span>Furthest marker on the trail so far.</span></li>
+        <li><span class="d-k">games</span><span>Where a lot of the systems thinking comes from. Rules, state, and what happens when a player does the unexpected.</span></li>
+        <li><span class="d-k">headphones</span><span>Most of this board was built with these on.</span></li>
+        <li><span class="d-k">sci-fi</span><span>The genre that got me curious about machines that think, long before it was a job.</span></li>
+        <li><span class="d-k">the terminal</span><span>Still where the work happens. The kit is markdown and shell scripts for a reason.</span></li>
+        <li><span class="d-k">coffee</span><span>The other thing this board was built with.</span></li>
+      </ul>
+
+      <p class="panel-actions">
+        <a class="btn btn--ghost" href="the-kit.html#catalog">the catalog &rarr;</a>
+      </p>
     </div>
   </section>
 
@@ -685,7 +764,7 @@
   </div>
 </footer>
 
-<script src="assets/board.js?v=20260827r" defer></script>
-<script src="assets/scene.js?v=20260827r" defer></script>
+<script src="assets/board.js?v=20260828b" defer></script>
+<script src="assets/scene.js?v=20260828b" defer></script>
 </body>
 </html>

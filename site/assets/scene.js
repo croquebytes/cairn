@@ -264,6 +264,74 @@
 
   /* ------------------------------------------------------------- zoom UI */
 
+  /* ----------------------------------------------------------- sticker notes
+     Hover a sticker, get a line about it. The tooltip lives in the stage, not
+     the plane, so it stays a constant readable size no matter how far the
+     board is zoomed out — a tooltip inside .plane would render at 0.8x and be
+     unreadable at fit.
+
+     Mouse affordance only, by design: the stickers stay aria-hidden, and every
+     line here is also written out in the "Ask me how" panel, which is keyboard
+     reachable. Nothing is hover-only. */
+  var tip = document.createElement('div');
+  tip.className = 'sticker-tip';
+  tip.hidden = true;
+  stage.appendChild(tip);
+
+  var tipFor = null;
+
+  function hideTip() {
+    if (!tipFor) return;
+    tipFor = null;
+    tip.hidden = true;
+    tip.classList.remove('is-on');
+  }
+
+  function showTip(el) {
+    var title = el.getAttribute('data-note-title') || '';
+    var body = el.getAttribute('data-note') || '';
+    if (!body) return;
+    tipFor = el;
+    tip.innerHTML = '';
+    if (title) {
+      var h = document.createElement('span');
+      h.className = 'sticker-tip-title mono';
+      h.textContent = title;
+      tip.appendChild(h);
+    }
+    var b = document.createElement('span');
+    b.className = 'sticker-tip-body';
+    b.textContent = body;
+    tip.appendChild(b);
+
+    tip.hidden = false;
+    /* measure, then place: above the sticker, clamped inside the stage */
+    var sr = stage.getBoundingClientRect();
+    var er = el.getBoundingClientRect();
+    var tr = tip.getBoundingClientRect();
+    var x = (er.left - sr.left) + er.width / 2 - tr.width / 2;
+    var y = (er.top - sr.top) - tr.height - 12;
+    if (y < 8) y = (er.bottom - sr.top) + 12;          /* flip below if no room */
+    x = Math.max(8, Math.min(x, stage.clientWidth - tr.width - 8));
+    y = Math.max(8, Math.min(y, stage.clientHeight - tr.height - 8));
+    tip.style.left = Math.round(x) + 'px';
+    tip.style.top = Math.round(y) + 'px';
+    tip.classList.add('is-on');
+  }
+
+  plane.addEventListener('mouseover', function (e) {
+    var el = e.target.closest && e.target.closest('.sticker-hot');
+    if (el && el !== tipFor && !openId) showTip(el);
+  });
+  plane.addEventListener('mouseout', function (e) {
+    var el = e.target.closest && e.target.closest('.sticker-hot');
+    if (el && el === tipFor) hideTip();
+  });
+  /* any camera move or panel change invalidates the position */
+  stage.addEventListener('pointerdown', hideTip);
+  stage.addEventListener('wheel', hideTip, { passive: true });
+  window.addEventListener('resize', hideTip);
+
   var zoomUI = document.querySelector('.zoomui');
   function syncZoomUI() {
     /* Once zoomed in, the stage takes over touch so pan and pinch work. Until

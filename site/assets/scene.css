@@ -764,3 +764,118 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 @media (max-width: 899px) {
   .sticker { display: none; }
 }
+
+/* ==========================================================================
+   Sticker notes
+   Eleven stickers carry a line about why they are on the board. Only those
+   take pointer events — the backdrop and underlay layers stay inert, because
+   they cover large areas and would otherwise swallow drag-to-pan.
+
+   Pointer-down deliberately still reaches the pan handler: hovering a sticker
+   shows its note, but dragging from one still moves the board.
+   ========================================================================== */
+
+.sticker-hot {
+  pointer-events: auto;
+  cursor: help;
+}
+.sticker-hot:hover { filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16)); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sticker-hot { transition: filter var(--micro) ease-out, transform var(--micro) ease-out; }
+  .sticker-hot:hover { transform: rotate(var(--rot, 0deg)) scale(1.06); }
+}
+
+.sticker-tip {
+  position: absolute;
+  z-index: 40;
+  max-width: 268px;
+  padding: 10px 13px 11px;
+  background: var(--board-white);
+  border: var(--stroke-thin) solid var(--ink);
+  border-radius: 3px 12px 4px 14px / 13px 4px 12px 3px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+}
+.sticker-tip.is-on { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker-tip { transition: none; }
+}
+
+.sticker-tip-title {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-blue-text);
+  margin-bottom: 4px;
+}
+.sticker-tip-body {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+/* the board is hidden on phones, so these never apply there */
+@media (max-width: 899px) {
+  .sticker-hot { pointer-events: none; }
+  .sticker-tip { display: none; }
+}
+
+/* --------------------------------------------------------- ask me how ---- */
+/* The cairn and coffee art are underlay (z-index 1), so the sticky sitting
+   partly over them is the intended look — a note pinned on top of the board's
+   artwork. They keep their original positions. */
+/* Sits above the "AI drafts, a human sends" annotation (x520-730, y510), in
+   the open area to the right of the hero's CTA. The hero's BOX runs to x740 /
+   y407, but its content stops at the note and button, so this region is empty
+   in fact even though a box-level scan calls it occupied. Clear of the cairn
+   art entirely, and 43 units above the loop strip. */
+.s-ask { left: 540px; top: 330px; width: 136px; z-index: 4; }
+.s-ask .note { padding: 9px 11px 10px; }
+.s-ask .note-title { font-size: 14px; display: block; margin-bottom: 2px; line-height: 1.15; }
+.s-ask .spot-line { font-size: 10.5px; line-height: 1.35; }
+.s-ask .spot-card { --rot: -2.2deg; }
+
+.ask-list { list-style: none; margin: 0 0 var(--u3); padding: 0; }
+.ask-list li {
+  font-size: var(--t-small);
+  line-height: 1.6;
+  padding: var(--u2) 0;
+  border-bottom: 1px dashed var(--dot);
+  max-width: 62ch;
+}
+.ask-list li:last-child { border-bottom: 0; }
+.ask-q {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+}
+
+.decoded { list-style: none; margin: 0 0 var(--u2); padding: 0; }
+.decoded li {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: var(--u2);
+  font-size: var(--t-small);
+  line-height: 1.55;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--dot);
+}
+.decoded li:last-child { border-bottom: 0; }
+.decoded dt, .decoded .d-k {
+  font-family: var(--font-mono);
+  font-size: var(--t-note);
+  color: var(--ink-blue-text);
+}
+@media (max-width: 560px) {
+  .decoded li { grid-template-columns: 1fr; gap: 2px; }
+}

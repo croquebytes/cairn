@@ -23,11 +23,12 @@ unzip cairn-kit.zip && cd cairn-kit
 ./scripts/init.sh "My Vault"
 ```
 
-Once the repository is public you can clone it instead — the kit lives at
-`kit/` inside it:
+Or clone the repository — the kit lives at `kit/` inside it:
 
 ```bash
-# git clone https://github.com/croquebytes/cairn.git && cd cairn/kit
+git clone https://github.com/croquebytes/cairn.git
+cd cairn/kit
+./scripts/init.sh "My Vault"
 ```
 
 `init.sh` names the vault, appends the first chronicle entry, starts a fresh git

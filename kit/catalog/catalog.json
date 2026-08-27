@@ -1,0 +1,84 @@
+{
+  "catalog": "cairn",
+  "version": "0.1.0",
+  "updated": "2026-08-26",
+  "contract": {
+    "SKILL.md": "the procedure — triggers, inputs, steps, explicit negative scope",
+    "params.md": "the tailoring surface — what a deployer edits per deployment",
+    "checklist.md": "the acceptance test — happy path, failure paths, the I-don't-know test, safety"
+  },
+  "skills": [
+    {
+      "name": "meeting-notes-summary",
+      "title": "Meeting notes → structured summary",
+      "kind": "generic",
+      "runs_on": "pasted or exported content",
+      "summary": "Decisions, owners, dates, and open questions — with ambiguity marked rather than smoothed over.",
+      "params": 10,
+      "tests": 9
+    },
+    {
+      "name": "inbox-triage",
+      "title": "Inbox triage",
+      "kind": "generic",
+      "runs_on": "vault contents",
+      "summary": "Promote, merge, archive, or escalate a queue under an explicit batch cap — with the remainder always stated.",
+      "params": 10,
+      "tests": 10
+    },
+    {
+      "name": "weekly-digest",
+      "title": "Weekly digest",
+      "kind": "generic",
+      "runs_on": "vault logs",
+      "summary": "What actually changed this week, including what stalled. Never pads a quiet week.",
+      "params": 10,
+      "tests": 9
+    },
+    {
+      "name": "doc-to-faq",
+      "title": "Document → FAQ",
+      "kind": "generic",
+      "runs_on": "pasted or exported content",
+      "summary": "The questions people actually ask, answered in plain language and cited back to the source section.",
+      "params": 11,
+      "tests": 10
+    },
+    {
+      "name": "sharepoint-faq-builder",
+      "title": "SharePoint FAQ builder",
+      "kind": "microsoft-365",
+      "runs_on": "pasted or exported content",
+      "summary": "A self-service page with the governance metadata that decides whether it is still true in a year. Ships as Draft.",
+      "params": 13,
+      "tests": 12
+    },
+    {
+      "name": "teams-thread-summarizer",
+      "title": "Teams thread summarizer",
+      "kind": "microsoft-365",
+      "runs_on": "pasted or exported content",
+      "summary": "Sorts a thread into decisions, proposals, opinions, and open questions. Reactions are not approval.",
+      "params": 10,
+      "tests": 12
+    },
+    {
+      "name": "policy-change-announcement",
+      "title": "Policy-change announcement drafter",
+      "kind": "microsoft-365",
+      "runs_on": "pasted or exported content",
+      "summary": "What changes, when, what you must do — drafted per channel, with unconfirmed facts listed at the top. Sends nothing.",
+      "params": 12,
+      "tests": 12
+    },
+    {
+      "name": "decision-register",
+      "title": "Decision register",
+      "kind": "microsoft-365",
+      "runs_on": "pasted or exported content",
+      "summary": "Append-only record of what was decided, by whom, on what basis, and what it superseded. Entries are never edited.",
+      "params": 10,
+      "tests": 12
+    }
+  ]
+}

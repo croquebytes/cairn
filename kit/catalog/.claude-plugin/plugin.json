@@ -1,0 +1,10 @@
+{
+  "name": "cairn-catalog",
+  "version": "0.1.0",
+  "description": "Packaged, tailorable skills for a Cairn vault. Each skill ships as a procedure, a tailoring surface, and an acceptance test.",
+  "author": {
+    "name": "The Cairn contributors"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/croquebytes/cairn"
+}

@@ -1,0 +1,27 @@
+# Netlify build config for the Cairn repo.
+#
+# `base` scopes the build to site/, so nothing above it is published — the kit
+# source lives at kit/ and is distributed as a zip, not served. `publish` is
+# relative to base, so "." means site/ itself.
+
+[build]
+  base = "site"
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/cairn-kit.zip"
+  [headers.values]
+    Content-Disposition = "attachment; filename=\"cairn-kit.zip\""

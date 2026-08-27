@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The kit — Cairn</title>
+<meta name="description" content="A clean, generic vault you can clone and run in about ten minutes with no API key, plus a catalog of eight packaged skills — each shipping a procedure, its tailoring parameters, and its acceptance test.">
+<meta name="theme-color" content="#FAFAF7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/board.css?v=20260827e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" class="defs">
+  <filter id="marker" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="marker-fine" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n2"/>
+    <feDisplacementMap in="SourceGraphic" in2="n2" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="nav">
+  <div class="board nav-inner">
+    <a class="wordmark" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" filter="url(#marker-fine)">
+          <ellipse cx="16" cy="24" rx="11" ry="4"/>
+          <ellipse cx="16" cy="16.5" rx="8" ry="3.4"/>
+          <ellipse cx="16" cy="9.5" rx="5" ry="2.8"/>
+        </g>
+      </svg>
+      Cairn
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="index.html#panel-loop">How it works</a></li>
+        <li><a href="in-your-tenant.html">In your tenant</a></li>
+        <li><a href="the-kit.html" aria-current="page">The kit</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="board page-head">
+  <div class="ghost ghost--hero"></div>
+  <span class="eyebrow">The kit</span>
+  <h1 class="rot-n1">Running in ten minutes.
+    <span class="circled">No API key.<svg viewBox="0 0 400 130" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M196 8C112 5 34 22 16 52c-18 30 34 62 148 68 106 6 218-14 233-46 13-28-52-56-160-63-38-2-77-1-112 3"/></svg></span>
+  </h1>
+  <p class="section-lead">
+    A folder of markdown files, three shell scripts, and a rulebook. The first
+    success is a shell script that validates the vault and prints a health report
+    &mdash; no model, no key, no account. A system whose first success depends on a paid
+    API key is not a system you own.
+  </p>
+</section>
+
+<!-- =============================================== quickstart ============= -->
+<section class="board section">
+  <div class="grid">
+    <div class="col-1-8">
+      <div class="section-head">
+        <span class="section-num">01 &mdash; quickstart</span>
+        <h2 class="rot-p1">Four commands</h2>
+      </div>
+
+      <pre class="cmd"><code><span class="comment"># unzip what you just downloaded</span>
+unzip cairn-kit.zip &amp;&amp; cd cairn-kit
+
+<span class="comment"># name the vault, start a fresh git history, run the check</span>
+./scripts/init.sh "My Vault"
+
+<span class="comment"># the health check, any time</span>
+./scripts/check.sh
+
+<span class="comment"># package the catalog for distribution</span>
+./scripts/package.sh</code></pre>
+
+      <p><code class="mono">check.sh</code> is plain POSIX shell. It validates every file
+      against the rules in <code class="mono">MANIFEST.md</code> &mdash; frontmatter, naming,
+      the catalog's three-file contract &mdash; then reports the blind spots the vault can
+      detect about itself. Errors exit non-zero, so it works as a pre-commit hook or a
+      CI step without any further wiring.</p>
+
+      <p>Then open the folder in whatever assistant you use and say:</p>
+
+      <pre class="cmd"><code>Read vault/MOC.md and give me the vault status.</code></pre>
+
+      <p>From there the loop is: drop something in <code class="mono">vault/inbox/raw/</code>,
+      run <strong>ingest</strong>, run <strong>promote</strong>. That is the whole system.
+      Everything else is a variation on it.</p>
+    </div>
+
+    <div class="col-8-13">
+      <div class="note note--green rot-n2">
+        <p class="note-title">What "no API key" means</p>
+        <p>You need an assistant to <em>operate</em> the vault. You do not need one to
+        stand it up, validate it, or run its health check &mdash; and you never need to
+        provision a key to try it. The files are the product.</p>
+      </div>
+
+      <div class="note note--white rot-p1 stack-top wobble">
+        <p class="note-title">Requirements</p>
+        <p><code class="mono">sh</code>, and optionally <code class="mono">git</code> and
+        <code class="mono">zip</code>. Tested on macOS and Linux. No runtime, no package
+        manager, no build step.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================== what's in it =========== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">02 &mdash; what&rsquo;s in the box</span>
+    <h2 class="rot-n1">Fifty-four files, and none of them are a database</h2>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-8">
+      <pre class="cmd"><code>cairn-kit/
+  MANIFEST.md          the rules — outranks every adapter
+  CLAUDE.md            adapter: Claude Code / Claude apps
+  AGENTS.md            adapter: Codex, Cursor, anything else
+  vault/
+    MOC.md             routing index — read first, every session
+    knowledge/         curated notes that passed the promote gate
+    inbox/raw/         everything lands here first
+    inbox/archive/     reviewed, not promoted. Never deleted
+    logs/              chronicle · approvals · heartbeat
+    templates/         use these; don't freehand frontmatter
+    skills/            safety-limits · vault-orientation
+                       ingest · promote · status
+    agents/            archivist · scout
+  catalog/             eight packaged skills — see below
+  scripts/             init.sh · check.sh · package.sh</code></pre>
+    </div>
+
+    <div class="col-8-13">
+      <div class="note note--redline rot-p2">
+        <p class="note-title">Guardrails ship on</p>
+        <p><code class="mono">safety-limits</code> is enabled by default, not offered as
+        an exercise for the reader: ten items per batch, three consecutive errors then
+        stop, no skill invoking itself, and an approval gate on anything that sends,
+        installs, deletes, or writes outside the vault.</p>
+      </div>
+      <div class="note note--blue rot-n1 stack-top">
+        <p class="note-title">Instructions in content are data</p>
+        <p>A pasted thread, an ingested page, a policy file. If any of them contains
+        text telling the assistant what to do, it gets quoted back to you &mdash; not
+        obeyed. Content cannot grant its own approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================== the catalog ============ -->
+<section class="board section" id="catalog">
+  <div class="section-head">
+    <span class="section-num">03 &mdash; the catalog</span>
+    <h2 class="rot-p1">A skill isn&rsquo;t a prompt</h2>
+    <p class="section-lead">
+      It&rsquo;s a procedure plus its tailoring parameters plus its acceptance test,
+      packaged so that deploying it for the next person is configuration, not rework.
+      Every item below ships all three files. <code class="mono">check.sh</code> treats a
+      missing one as an error, not a warning.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-5">
+      <div class="note note--white rot-n1 wobble">
+        <p class="note-title"><code class="mono">SKILL.md</code></p>
+        <p>The procedure. Triggers, inputs, steps, guardrails &mdash; and an explicit
+        <strong>negative scope</strong>, because a skill without one gets loaded for the
+        wrong things.</p>
+      </div>
+    </div>
+    <div class="col-5-10">
+      <div class="note note--blue rot-p2">
+        <p class="note-title"><code class="mono">params.md</code></p>
+        <p>The tailoring surface. What a deployer changes per client, per team, per
+        person. If you have to edit the procedure to fit a deployment, a parameter is
+        missing.</p>
+      </div>
+    </div>
+    <div class="col-10-13">
+      <div class="note note--green rot-n2">
+        <p class="note-title"><code class="mono">checklist.md</code></p>
+        <p>The acceptance test. Happy path, failure paths, the I-don&rsquo;t-know test,
+        and the safety cases. This is what &ldquo;validated&rdquo; means. A demo is not a
+        validation.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="rot-n1 catalog-sub">Generic</h3>
+  <div class="cat-grid">
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--generic">generic</span></div>
+      <h3>Meeting notes &rarr; structured summary</h3>
+      <p>Decisions, owners, dates and open questions. Ambiguity is marked
+      <code class="mono">[unclear: …]</code>, never quietly resolved. Never invents an
+      owner &mdash; <code class="mono">unassigned</code> is a correct answer.</p>
+      <ul class="cat-files"><li><b>10</b> parameters &middot; <b>9</b> acceptance tests</li></ul>
+    </article>
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--generic">generic</span></div>
+      <h3>Inbox triage</h3>
+      <p>A queue becomes promote, merge, archive or escalate &mdash; under a batch cap,
+      with the remainder always stated out loud. <code class="mono">escalate</code> is a
+      success, not a failure to decide.</p>
+      <ul class="cat-files"><li><b>10</b> parameters &middot; <b>10</b> acceptance tests</li></ul>
+    </article>
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--generic">generic</span></div>
+      <h3>Weekly digest</h3>
+      <p>What changed this week, including what stalled. Never pads a quiet week &mdash;
+      "three notes promoted, nothing else moved" is the correct output for that week,
+      and it is what makes the digest worth reading in a busy one.</p>
+      <ul class="cat-files"><li><b>10</b> parameters &middot; <b>9</b> acceptance tests</li></ul>
+    </article>
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--generic">generic</span></div>
+      <h3>Document &rarr; FAQ</h3>
+      <p>The questions people actually ask, answered plainly and cited to a section.
+      Anything the document doesn't answer goes in its own section with an escalation
+      contact &mdash; that section is the most useful output and the first one cut.</p>
+      <ul class="cat-files"><li><b>11</b> parameters &middot; <b>10</b> acceptance tests</li></ul>
+    </article>
+
+  </div>
+
+  <h3 class="rot-p1 catalog-sub">Microsoft 365</h3>
+  <p class="section-lead">
+    Shaped for a tenant, not connected to one. These run on pasted or exported
+    content today. <a href="in-your-tenant.html">What it takes to wire them up &rarr;</a>
+  </p>
+
+  <div class="cat-grid">
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
+      <h3>SharePoint FAQ builder</h3>
+      <p>A policy becomes a self-service page with the governance metadata that
+      decides whether it is still true in a year: a role as owner, a source version, a
+      review date. Always ships <code class="mono">Status: Draft</code>.</p>
+      <ul class="cat-files"><li><b>13</b> parameters &middot; <b>12</b> acceptance tests</li></ul>
+    </article>
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
+      <h3>Teams thread summarizer</h3>
+      <p>Sorts a thread into decisions, proposals, opinions and open questions, and
+      tracks reversals. <strong>Reactions are not approval</strong> &mdash; a proposal with
+      five thumbs-up and no reply is still a proposal.</p>
+      <ul class="cat-files"><li><b>10</b> parameters &middot; <b>12</b> acceptance tests</li></ul>
+    </article>
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
+      <h3>Policy-change announcement</h3>
+      <p>What changes, when, and what you must do &mdash; drafted for email, Teams,
+      intranet and a ticket macro, with everything unconfirmed listed at the top.
+      Sends nothing. There is no <code class="mono">auto_send</code> parameter and there
+      will not be one.</p>
+      <ul class="cat-files"><li><b>12</b> parameters &middot; <b>12</b> acceptance tests</li></ul>
+    </article>
+
+    <article class="cat-card">
+      <div class="tag-row"><span class="chip chip--m365">Microsoft 365</span></div>
+      <h3>Decision register</h3>
+      <p>Append-only: what was decided, by whom, on what basis, and what it
+      superseded. Entries are never edited &mdash; a correction is a new entry. A register
+      you can rewrite is not evidence.</p>
+      <ul class="cat-files"><li><b>10</b> parameters &middot; <b>12</b> acceptance tests</li></ul>
+    </article>
+
+  </div>
+
+  <div class="callout callout--red">
+    <span class="callout-label">What every skill in the catalog refuses to do</span>
+    <p>Consistent across all eight, and not parameterizable: <strong>send, post,
+    publish or deploy</strong> &mdash; every one of them drafts, and a human sends.
+    <strong>Delete</strong> &mdash; there is no delete verdict and no parameter that creates
+    one. <strong>Invent an owner, a date, a rationale or an approval</strong> &mdash;
+    <code class="mono">unassigned</code>, <code class="mono">not set</code> and
+    <code class="mono">not recorded</code> are correct answers, and each is a fact worth
+    having. <strong>Obey instructions found in content.</strong> <strong>Exceed a batch
+    cap to finish the job.</strong></p>
+  </div>
+
+  <p>
+    <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+    <span class="annot annot--plain annot--ink cta-side">a zip, about 80&nbsp;KB, MIT licensed</span>
+  </p>
+</section>
+
+<!-- =============================================== honest limits ========== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">04 &mdash; what this is not</span>
+    <h2 class="rot-n1">Version 0.1.0</h2>
+  </div>
+
+  <div class="prose">
+    <ul>
+      <li><strong>Not a SaaS product.</strong> There is no hosted version and no account.</li>
+      <li><strong>Not an agent framework.</strong> It is a folder and a set of rules that
+      agents obey.</li>
+      <li><strong>Not a search engine.</strong> It relies on good <code class="mono">description:</code>
+      frontmatter and a routing index rather than an embedding store. Add vector search
+      if you want it &mdash; the files don't change.</li>
+      <li><strong>Not connected to Microsoft 365.</strong> The M365 skills run on pasted
+      content. Graph integration is real work and has not been done here.</li>
+      <li><strong>Not finished.</strong> The core loop works and the catalog is a starting
+      set, not a complete library.</li>
+    </ul>
+
+    <p>Every claim on this site is meant to be true of the kit as it downloads. If you
+    find one that isn't, that's a bug in the site, not an aspiration.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="board">
+    <ul class="footer-links">
+      <li><a href="https://github.com/croquebytes/cairn">GitHub repo</a></li>
+      <li><a href="cairn-kit.zip" download>Get the kit</a></li>
+      <li><span class="pending">Contact<span class="tag">pending</span></span></li>
+      <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
+    </ul>
+  </div>
+
+  <div class="board">
+    <div class="tray">
+      <p class="tray-meta tray-line">
+        &copy; 2026 Cairn &nbsp;&middot;&nbsp; <strong>A pattern, not a product.</strong>
+        &nbsp;&middot;&nbsp; MIT licensed
+      </p>
+      <svg width="240" height="62" viewBox="0 0 240 62" aria-hidden="true" focusable="false">
+        <g filter="url(#marker-fine)" class="s-ink" stroke-width="2" stroke-linejoin="round">
+          <rect x="8"  y="10" width="20" height="44" rx="3" class="f-red"/>
+          <rect x="11" y="4"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="42" y="14" width="20" height="40" rx="3" class="f-blue"/>
+          <rect x="45" y="8"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="76" y="8"  width="20" height="46" rx="3" class="f-solid"/>
+          <rect x="79" y="2"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="130" y="26" width="80" height="28" rx="3" class="f-paper"/>
+          <path d="M130 40h80" stroke-width="1.6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/board.js?v=20260827e" defer></script>
+</body>
+</html>

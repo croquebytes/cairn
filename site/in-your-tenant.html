@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In your tenant — Cairn</title>
+<meta name="description" content="The vault pattern on Microsoft rails. A tenant already ships a file store with metadata, versioning, permissions, approvals and audit — the full concept mapping, what you would build with it, and what it honestly takes.">
+<meta name="theme-color" content="#FAFAF7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/board.css?v=20260827e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" class="defs">
+  <filter id="marker" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="marker-fine" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n2"/>
+    <feDisplacementMap in="SourceGraphic" in2="n2" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="nav">
+  <div class="board nav-inner">
+    <a class="wordmark" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" filter="url(#marker-fine)">
+          <ellipse cx="16" cy="24" rx="11" ry="4"/>
+          <ellipse cx="16" cy="16.5" rx="8" ry="3.4"/>
+          <ellipse cx="16" cy="9.5" rx="5" ry="2.8"/>
+        </g>
+      </svg>
+      Cairn
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="index.html#panel-loop">How it works</a></li>
+        <li><a href="in-your-tenant.html" aria-current="page">In your tenant</a></li>
+        <li><a href="the-kit.html">The kit</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="board page-head">
+  <div class="ghost ghost--hero"></div>
+  <span class="eyebrow">In your tenant</span>
+  <h1 class="rot-n1">SharePoint is already
+    <span class="circled">a vault.<svg viewBox="0 0 400 130" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M196 8C112 5 34 22 16 52c-18 30 34 62 148 68 106 6 218-14 233-46 13-28-52-56-160-63-38-2-77-1-112 3"/></svg></span>
+  </h1>
+  <p class="section-lead">
+    The vault is a pattern, not a product. Microsoft 365 already ships a file store
+    with metadata, versioning, permissions, and audit &mdash; the pattern turns what a
+    tenant already owns into an AI-operable knowledge system. Nothing to buy is the
+    strongest pitch there is.
+  </p>
+</section>
+
+<!-- =============================================== the mapping ============ -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">01 &mdash; the mapping</span>
+    <h2 class="rot-p1">Every part of the vault already has a name here</h2>
+    <p class="section-lead">
+      The landing page carries the short version. This is the whole thing. Read it
+      as a translation, not a migration &mdash; nothing on the right is a product you
+      have to go and buy.
+    </p>
+  </div>
+
+  <div class="board-table-wrap">
+    <table class="board-table">
+      <caption>vault concept &rarr; Microsoft 365 native equivalent</caption>
+      <thead>
+        <tr>
+          <th scope="col">Vault concept</th>
+          <th scope="col" class="arrow-cell"><span class="sr-only">maps to</span></th>
+          <th scope="col">M365 native equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Markdown files as source of truth</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>.md files in a SharePoint document library, or a OneDrive folder</td></tr>
+        <tr><td>YAML frontmatter</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint metadata columns &mdash; indexed, filterable, flow-triggerable</td></tr>
+        <tr><td>Append-only chronicle and logs</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>A SharePoint list with versioning, plus the Purview unified audit log</td></tr>
+        <tr><td>Git history</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint version history &mdash; native, per file, already on</td></tr>
+        <tr><td>MOC routing index</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>A SharePoint list or index page; queryable through Graph</td></tr>
+        <tr><td>Skills catalog</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>A document library of skill packages, with metadata for tier and params</td></tr>
+        <tr><td>Approval gate before writes</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Power Automate approvals &mdash; the card lands in Teams</td></tr>
+        <tr><td>Scheduler and heartbeat</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Scheduled flows plus a run-log list</td></tr>
+        <tr><td>Mailbox / atomic handoff</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>List items with claim semantics, or Planner tasks</td></tr>
+        <tr><td>Permission tiers</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>Entra groups, site and library permissions, Conditional Access</td></tr>
+        <tr><td>Embeddings and search</td><td class="arrow-cell"><span aria-hidden="true">&rarr;</span></td><td>SharePoint search and Microsoft Graph; the vault indexed through a Graph connector</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--red">
+    <span class="callout-label">What this page is not claiming</span>
+    <p>The kit does not connect to a tenant. Its Microsoft 365 skills run on pasted
+    or exported content today &mdash; a copied Teams thread, a downloaded policy, a
+    message-centre item. They are shaped for a tenant, not wired to one.</p>
+    <p>Wiring them to live data means a Graph app registration, delegated
+    permissions, an admin consent conversation, and a permissions review. That is
+    real work, and this page is not going to describe it as a checkbox.</p>
+  </div>
+</section>
+
+<!-- =============================================== what you'd build ======= -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">02 &mdash; what you would build with it</span>
+    <h2 class="rot-n1">Four that earn their keep first</h2>
+    <p class="section-lead">
+      Each one names the vault mechanism it reuses &mdash; which is the point. These
+      are not twelve ideas; they are one system pointed at twelve problems.
+    </p>
+  </div>
+
+  <div class="case-grid">
+
+    <article class="case rot-n1">
+      <div class="tag-row"><span class="chip chip--internal">MSP internal</span></div>
+      <svg width="58" height="46" viewBox="0 0 58 46" aria-hidden="true" focusable="false" class="arrow">
+        <g filter="url(#marker)">
+          <path d="M4 40h50M8 40V16l10-8h16l6 6h14v26"/>
+          <path d="M18 24h20M18 31h14"/>
+        </g>
+      </svg>
+      <h3>Per-client engagement vault</h3>
+      <p>Every engagement gets a vault in the client's own SharePoint: discovery
+      notes, an append-only decision log, the as-built, and runbooks that ship as
+      skills. When the delivery engineer changes, the vault <em>is</em> the handoff.
+      Institutional memory that survives turnover.</p>
+      <span class="reuses">reuses: the whole loop, plus the decision register</span>
+    </article>
+
+    <article class="case rot-p1">
+      <div class="tag-row"><span class="chip chip--both">Both</span></div>
+      <svg width="58" height="46" viewBox="0 0 58 46" aria-hidden="true" focusable="false" class="arrow">
+        <g filter="url(#marker)">
+          <path d="M29 6v12M29 18C18 18 10 24 8 34M29 18c11 0 19 6 21 16"/>
+          <path d="M3 40l5-8 6 8zM45 40l5-8 6 8z"/>
+          <path d="M22 6h14"/>
+        </g>
+      </svg>
+      <h3>Curate once, serve both</h3>
+      <p>Index the vault through a Graph connector and Copilot and Claude answer
+      from the same curated source. Clients ask "Copilot or Claude?" &mdash; the vault
+      answer is that this is a runtime choice, not a knowledge choice. The adapter
+      story at tenant scale.</p>
+      <span class="reuses">reuses: CLAUDE.md / AGENTS.md adapters, MOC routing</span>
+    </article>
+
+    <article class="case rot-p2">
+      <div class="tag-row"><span class="chip chip--m365">Customer</span></div>
+      <svg width="58" height="46" viewBox="0 0 58 46" aria-hidden="true" focusable="false" class="arrow">
+        <g filter="url(#marker)">
+          <path d="M5 34c10-2 14-14 22-14s10 10 18 8"/>
+          <path d="M5 12h30M5 20h20"/>
+          <path d="M46 24l6 4-6 5"/>
+        </g>
+      </svg>
+      <h3>The living as-built</h3>
+      <p>Deliver as-built documentation as a small vault instead of a PDF. Config
+      changes append to the decision log through a flow, and a weekly lint compares
+      what is documented to what the tenant actually reports through Graph. Drift
+      becomes a scored report instead of a surprise.</p>
+      <span class="reuses">reuses: health checks, append-only chronicle, heartbeat</span>
+    </article>
+
+    <article class="case rot-n2">
+      <div class="tag-row"><span class="chip chip--internal">MSP internal</span></div>
+      <svg width="58" height="46" viewBox="0 0 58 46" aria-hidden="true" focusable="false" class="arrow">
+        <g filter="url(#marker)">
+          <path d="M29 38c-13 0-24-6-24-14S16 10 29 10s24 6 24 14-11 14-24 14z"/>
+          <path d="M29 30a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/>
+        </g>
+      </svg>
+      <h3>Platform-change watch</h3>
+      <p>Run the standing-topics rotation for the practice rather than for one
+      person: Anthropic releases, Graph changes, the M365 message centre. Each topic
+      carries a last-covered date, and the coverage gaps report themselves. One
+      system watching on behalf of every client environment.</p>
+      <span class="reuses">reuses: the scout role, standing topics, ingest</span>
+    </article>
+
+  </div>
+
+  <h3 class="rot-p1">More patterns</h3>
+  <p class="section-lead">Same machinery, different problem.</p>
+
+  <div class="more-grid">
+    <div class="more-item"><b>Ticket &rarr; knowledge loop</b> Resolved tickets ingested, novelty-scored against the KB, promoted or archived. Duplicate articles stop accumulating because the gate exists. <span class="mono muted">[Both]</span></div>
+    <div class="more-item"><b>Meeting &rarr; decision register</b> Transcripts in; decisions with owners and dates appended to a register list; a weekly digest posted back. Answers "when did we decide that?" <span class="mono muted">[Customer]</span></div>
+    <div class="more-item"><b>Governance evidence vault</b> Approvals, AI-usage logs, policy versions and audit extracts curated append-only in one library. Evidence, not assertions. <span class="mono muted">[Customer]</span></div>
+    <div class="more-item"><b>Onboarding vault for client admins</b> Runbooks shipped as a vault with skills and params, so a new admin inherits a system rather than a PDF. <span class="mono muted">[Customer]</span></div>
+    <div class="more-item"><b>Shared-mailbox triage</b> Shared mailbox &rarr; inbox &rarr; a classification skill proposes &rarr; a human approves in Teams &rarr; routed. AI drafts, a human sends, on email. <span class="mono muted">[Customer]</span></div>
+    <div class="more-item"><b>SOW and precedent library</b> Past scopes as knowledge with novelty scoring: have we solved this before, and where. Estimation memory. <span class="mono muted">[MSP internal]</span></div>
+    <div class="more-item"><b>Personal vault in OneDrive</b> Each consultant's second brain inside the tenant, so DLP, retention and legal hold actually apply. The IT-blessable version of "I keep notes in an app". <span class="mono muted">[Both]</span></div>
+    <div class="more-item"><b>Catalog as a SharePoint list</b> Catalog items as list entries with params, checklist, tier and version; deploying to a client becomes a provisioning flow. <span class="mono muted">[MSP internal]</span></div>
+  </div>
+</section>
+
+<!-- =============================================== toolsets =============== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">03 &mdash; what opens it</span>
+    <h2 class="rot-n1">The vault doesn&rsquo;t care what opens it</h2>
+    <p class="section-lead">
+      That is the durability argument made concrete. Markdown in a folder has no
+      opinion about the editor.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-8 prose">
+      <h3>Obsidian, pointed at a synced folder</h3>
+      <p>The honest first answer: you don't abandon the tool, you move custody. Same
+      interface, same graph view, same plugins &mdash; but the vault now lives where DLP,
+      retention, versioning and backup apply to it.</p>
+
+      <h3>VS Code</h3>
+      <p>Free, markdown-native, git-aware. The natural fit for technical users, and
+      the editor an AI coding assistant is usually sitting in anyway.</p>
+
+      <h3>The SharePoint library, directly</h3>
+      <p>.md files with metadata columns, edited in the browser. The no-install
+      answer, and the one that makes the pattern visible to people who will never
+      open a code editor.</p>
+
+      <h3>Loop and OneNote as human surfaces</h3>
+      <p>Where an organisation already lives in these, a small sync skill normalises
+      pages into markdown in the canonical library. Same adapter pattern as
+      CLAUDE.md and AGENTS.md: one canonical store, thin surfaces over it.</p>
+
+      <h3>A git repository</h3>
+      <p>GitHub or Azure DevOps, for teams that want pull-request review on knowledge
+      changes. Knowledge with a merge conflict is knowledge someone is paying
+      attention to.</p>
+    </div>
+
+    <div class="col-8-13">
+      <div class="note note--blue rot-p2">
+        <p class="note-title">One canonical store</p>
+        <p>Everything above is a surface. The rule that keeps this from turning into
+        five half-vaults is that exactly one location is canonical, and every other
+        surface syncs into it.</p>
+      </div>
+      <div class="note note--redline rot-n1 stack-top">
+        <p class="note-title">The failure mode</p>
+        <p>Two canonical stores. It always starts as a convenience and always ends as
+        a reconciliation project.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--blue">
+    <span class="callout-label">Where to start</span>
+    <p>Take one engagement, one shared mailbox, or one policy set. Stand the vault up
+    there, run it for a month, and read the chronicle at the end of it. The pattern
+    either earned its place in that month or it did not &mdash; and the log is what tells
+    you which, rather than anyone's impression.</p>
+  </div>
+
+  <p><a class="btn btn--blue" href="the-kit.html">See what ships in the kit</a></p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="board">
+    <ul class="footer-links">
+      <li><a href="https://github.com/croquebytes/cairn">GitHub repo</a></li>
+      <li><a href="cairn-kit.zip" download>Get the kit</a></li>
+      <li><span class="pending">Contact<span class="tag">pending</span></span></li>
+      <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
+    </ul>
+  </div>
+
+  <div class="board">
+    <div class="tray">
+      <p class="tray-meta tray-line">
+        &copy; 2026 Cairn &nbsp;&middot;&nbsp; <strong>A pattern, not a product.</strong>
+        &nbsp;&middot;&nbsp; MIT licensed
+      </p>
+      <svg width="240" height="62" viewBox="0 0 240 62" aria-hidden="true" focusable="false">
+        <g filter="url(#marker-fine)" class="s-ink" stroke-width="2" stroke-linejoin="round">
+          <rect x="8"  y="10" width="20" height="44" rx="3" class="f-red"/>
+          <rect x="11" y="4"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="42" y="14" width="20" height="40" rx="3" class="f-blue"/>
+          <rect x="45" y="8"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="76" y="8"  width="20" height="46" rx="3" class="f-solid"/>
+          <rect x="79" y="2"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="130" y="26" width="80" height="28" rx="3" class="f-paper"/>
+          <path d="M130 40h80" stroke-width="1.6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/board.js?v=20260827e" defer></script>
+</body>
+</html>

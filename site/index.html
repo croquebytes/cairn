@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cairn — a second brain any AI can run, safely</title>
+<meta name="description" content="One builder's working knowledge system, genericized into a pattern and a kit. Plain markdown as the source of truth, guardrails and human approvals built in — published as a work sample, not a product.">
+<meta name="theme-color" content="#FAFAF7">
+<meta property="og:title" content="Cairn — a second brain any AI can run, safely">
+<meta property="og:description" content="Plain files. Clear rules. Packaged skills. No lock-in. A work sample, not a product.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/board.css?v=20260827e">
+<link rel="stylesheet" href="assets/scene.css?v=20260827e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- marker wobble filters — decorative strokes only, never text -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" class="defs">
+  <filter id="marker" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="marker-fine" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n2"/>
+    <feDisplacementMap in="SourceGraphic" in2="n2" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="nav">
+  <div class="board nav-inner">
+    <a class="wordmark" href="/">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" filter="url(#marker-fine)">
+          <ellipse cx="16" cy="24" rx="11" ry="4"/>
+          <ellipse cx="16" cy="16.5" rx="8" ry="3.4"/>
+          <ellipse cx="16" cy="9.5" rx="5" ry="2.8"/>
+        </g>
+      </svg>
+      Cairn
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="in-your-tenant.html">In your tenant</a></li>
+        <li><a href="the-kit.html">The kit</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+  </div>
+</header>
+
+<!-- ================================================== THE BOARD (scene) ===
+     One whiteboard, one screen. Every pinned object is a hotspot: click it
+     and the camera zooms to it while its panel opens. JS-only — with
+     scripting off this whole layer is hidden and the panels below read as a
+     plain document. ==================================================== -->
+<div class="stage" id="stage" hidden>
+  <div class="plane" id="plane">
+
+    <!-- eraser ghosts -->
+    <div class="ghost sg-1"></div>
+    <div class="ghost sg-2"></div>
+    <div class="ghost sg-3"></div>
+
+    <!-- HERO scrawl — static, the thesis -->
+    <div class="s-hero">
+      <h1 class="rot-n1">
+        A second brain any AI can run &mdash;
+        <span class="circled">safely.<svg viewBox="0 0 400 130" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M196 8C112 5 34 22 16 52c-18 30 34 62 148 68 106 6 218-14 233-46 13-28-52-56-160-63-38-2-77-1-112 3"/></svg></span>
+      </h1>
+      <p class="hero-sub">Plain files. Clear rules. Packaged skills. <span class="nowrap">No lock-in.</span></p>
+      <p class="s-hero-note annot annot--plain annot--ink">Built and run daily by one person.
+        This board is a work sample, not a storefront.</p>
+      <div class="hero-cta">
+        <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+        <svg class="arrow cta-arrow" viewBox="0 0 118 96" aria-hidden="true" focusable="false">
+          <g filter="url(#marker)">
+            <path d="M108 6c10 32 2 56-22 68-14 7-32 10-50 11"/>
+            <path d="M48 76L32 85l17 9"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <span class="annot s-hint">click a note to open it &middot; scroll to zoom &middot; drag to pan</span>
+
+    <!-- KIT — yellow sticky -->
+    <button class="spot s-kit" data-panel="kit" aria-label="Yellow sticky note — the starter kit">
+      <span class="note note--yellow rot-p2 spot-card">
+        <span class="note-title">Starter kit</span>
+        <span class="spot-line">running in 10 minutes,<br>no API key</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- BUILDER — the taped card cluster. The new star of the board. -->
+    <button class="spot s-builder" data-panel="builder" aria-label="Taped card — what the builder made">
+      <span class="bcard rot-n1 spot-card">
+        <span class="tape tape--tl"></span>
+        <span class="tape tape--tr"></span>
+        <span class="bcard-kicker mono">the builder&rsquo;s corner</span>
+        <span class="note-title">What&rsquo;s behind this board</span>
+        <span class="bstats mono">
+          <span>69 skills</span>
+          <span>1 MCP server</span>
+          <span>5 agent roles</span>
+          <span>~50 endpoints</span>
+        </span>
+        <svg class="bcircle" viewBox="0 0 400 200" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+          <path d="M200 12C96 8 18 40 14 92c-4 56 76 96 190 94 110-2 186-42 182-96-3-48-80-80-186-78"/>
+        </svg>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- LOOP — the flowchart strip -->
+    <button class="spot s-loop" data-panel="loop" aria-label="Flowchart — how the loop works">
+      <span class="spot-card s-loop-card">
+        <span class="s-loop-title mono">the loop</span>
+        <span class="mini-flow" aria-hidden="true">
+          <span class="mini-box rot-p1">CAPTURE</span>
+          <svg class="arrow" viewBox="0 0 34 22"><g filter="url(#marker)"><path d="M3 11c8-2 17-2 28-1"/><path d="M24 6l7 5-7 5"/></g></svg>
+          <span class="mini-box rot-n1">CURATE</span>
+          <svg class="arrow" viewBox="0 0 34 22"><g filter="url(#marker)"><path d="M3 12c9 2 18 1 28-1"/><path d="M24 6l7 5-7 5"/></g></svg>
+          <span class="mini-box rot-p1">OPERATE</span>
+          <svg class="arrow" viewBox="0 0 34 22"><g filter="url(#marker)"><path d="M3 10c9-1 18 0 28 2"/><path d="M24 7l7 5-7 5"/></g></svg>
+          <span class="mini-box mini-box--audit rot-n1">AUDIT</span>
+        </span>
+        <span class="annot s-loop-note">AI drafts, a human sends</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- SKILLS — blue sticky -->
+    <button class="spot s-skills" data-panel="skills" aria-label="Blue sticky note — the skill catalog">
+      <span class="note note--blue rot-n2 spot-card">
+        <span class="note-title">Skill catalog</span>
+        <span class="spot-line">procedure + params +<br>acceptance test</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- RULES — guardrail sticky cluster -->
+    <button class="spot s-rules" data-panel="rules" aria-label="Guardrail stickies — approval gate and health checks">
+      <span class="spot-card s-rules-stack">
+        <span class="note note--redline rot-p2 mini-note">
+          <span class="note-title">Approval gate</span>
+          <span class="spot-line">writes wait for a human</span>
+        </span>
+        <span class="note note--white rot-n1 mini-note">
+          <span class="note-title">Health checks</span>
+          <span class="spot-line">it reports its own blind spots</span>
+        </span>
+        <span class="note note--green rot-p1 mini-note">
+          <span class="note-title">One vault, many AIs</span>
+          <span class="spot-line">curate once, serve every assistant</span>
+        </span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- M365 — the taped polaroid -->
+    <button class="spot s-m365" data-panel="m365" aria-label="Taped photo — the pattern mapped onto Microsoft 365">
+      <span class="polaroid rot-p1 spot-card figure-reset">
+        <span class="tape tape--tl"></span>
+        <span class="tape tape--tr"></span>
+        <span class="note-title polaroid-title">Works in Microsoft&nbsp;365</span>
+        <svg viewBox="0 0 480 200" aria-hidden="true" focusable="false" class="mini-map">
+          <g filter="url(#marker-fine)" class="f-paper s-ink" stroke-width="2.2">
+            <rect x="6"   y="10"  width="176" height="40" rx="3"/>
+            <rect x="6"   y="78"  width="176" height="40" rx="3"/>
+            <rect x="6"   y="146" width="176" height="40" rx="3"/>
+            <rect x="298" y="10"  width="176" height="40" rx="3"/>
+            <rect x="298" y="78"  width="176" height="40" rx="3"/>
+            <rect x="298" y="146" width="176" height="40" rx="3"/>
+          </g>
+          <g filter="url(#marker)" class="f-none s-blue" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M188 30c26-4 62-4 100 0"/><path d="M279 24l10 6-10 6"/>
+            <path d="M188 98c26 4 62 4 100 0"/><path d="M279 92l10 6-10 6"/>
+            <path d="M188 166c26-4 62-4 100 0"/><path d="M279 160l10 6-10 6"/>
+          </g>
+          <g font-family="Plus Jakarta Sans, sans-serif" font-size="15" class="f-ink">
+            <text x="20" y="35">Markdown files</text>
+            <text x="20" y="103">Approval gate</text>
+            <text x="20" y="171">Append-only log</text>
+            <text x="312" y="35">SharePoint library</text>
+            <text x="312" y="103">Approval in Teams</text>
+            <text x="312" y="171">List + audit log</text>
+          </g>
+        </svg>
+        <span class="spot-line mono muted">SharePoint is already a vault</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- PRINCIPLE — the torn page -->
+    <button class="spot s-principle" data-panel="principle" aria-label="Torn notebook page — the Cairn principle">
+      <span class="spot-card">
+        <span class="tape tape--top"></span>
+        <span class="torn rot-n1 s-torn">
+          <span class="s-quote">&ldquo;The vault is a pattern, not a&nbsp;product.&rdquo;</span>
+          <span class="mono s-cite">&mdash; the Cairn principle</span>
+        </span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- doodles: coffee + cairn, bottom-left -->
+    <svg class="s-doodles" viewBox="0 0 270 210" aria-hidden="true" focusable="false">
+      <g filter="url(#marker)">
+        <g class="doodle-late f-none s-ink" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 118h42l-4 39c-1 9-14 13-21 12-7-1-12-5-13-12z" class="f-white"/>
+          <path d="M66 126c11 0 13 18 1 20"/>
+        </g>
+        <g class="doodle-late f-none s-red" stroke-width="2.4" stroke-linecap="round">
+          <path d="M36 108c4-7-3-12 1-19"/>
+          <path d="M46 108c4-8-3-13 1-20"/>
+          <path d="M56 108c4-7-3-12 1-18"/>
+        </g>
+        <g class="f-white s-ink" stroke-width="2.4" stroke-linejoin="round">
+          <path class="stone stone--1" d="M103 167c2-9 22-16 53-15 32 1 52 8 51 17-1 9-22 15-53 14-31-1-52-7-51-16z"/>
+          <path class="stone stone--2" d="M114 144c2-8 17-14 41-13 24 1 39 7 38 15-1 8-17 13-40 12-23-1-40-6-39-14z"/>
+          <path class="stone stone--3" d="M124 123c2-7 13-12 32-11 18 1 29 6 28 13-1 7-14 11-31 10-17-1-30-5-29-12z"/>
+          <path class="stone stone--4" d="M135 104c1-6 9-10 21-9 12 1 19 5 18 11-1 6-10 9-20 8-11-1-20-4-19-10z"/>
+        </g>
+      </g>
+    </svg>
+
+    <!-- marker tray, drawn on the board's bottom edge -->
+    <svg class="s-tray" viewBox="0 0 240 62" aria-hidden="true" focusable="false">
+      <g filter="url(#marker-fine)" class="s-ink" stroke-width="2" stroke-linejoin="round">
+        <rect x="8"  y="10" width="20" height="44" rx="3" class="f-red"/>
+        <rect x="11" y="4"  width="14" height="8"  rx="2" class="f-paper"/>
+        <rect x="42" y="14" width="20" height="40" rx="3" class="f-blue"/>
+        <rect x="45" y="8"  width="14" height="8"  rx="2" class="f-paper"/>
+        <rect x="76" y="8"  width="20" height="46" rx="3" class="f-solid"/>
+        <rect x="79" y="2"  width="14" height="8"  rx="2" class="f-paper"/>
+        <rect x="130" y="26" width="80" height="28" rx="3" class="f-paper"/>
+        <path d="M130 40h80" stroke-width="1.6"/>
+      </g>
+    </svg>
+
+  </div>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="zoomui" role="group" aria-label="Board zoom">
+    <button type="button" data-zoom="out" aria-label="Zoom out">&minus;</button>
+    <span data-zoom="level" aria-hidden="true">100%</span>
+    <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+    <button type="button" data-zoom="reset" aria-label="Fit the board to the screen">fit</button>
+  </div>
+</div>
+
+<!-- pill nav — always present; anchors without JS, camera controls with it -->
+<nav class="map board" aria-label="Board sections">
+  <a class="pill" href="#panel-builder" data-panel="builder">The builder</a>
+  <a class="pill" href="#panel-loop" data-panel="loop">How it works</a>
+  <a class="pill" href="#panel-kit" data-panel="kit">Starter kit</a>
+  <a class="pill" href="#panel-skills" data-panel="skills">Skill catalog</a>
+  <a class="pill" href="#panel-rules" data-panel="rules">Guardrails</a>
+  <a class="pill" href="#panel-m365" data-panel="m365">Microsoft 365</a>
+  <a class="pill" href="#panel-principle" data-panel="principle">The principle</a>
+</nav>
+
+<!-- ======================================================= PANELS =========
+     Real content, real HTML. Without JS these stack as a readable document.
+     With JS each opens as a paper sheet beside the zoomed board. ========= -->
+<main id="main" class="panels board">
+
+  <section class="doc-hero" aria-label="Introduction">
+    <h1>A second brain any AI can run &mdash; safely.</h1>
+    <p class="hero-sub">Plain files. Clear rules. Packaged skills. No lock-in.</p>
+    <p class="annot annot--plain annot--ink">Built and run daily by one person. This
+    board is a work sample, not a storefront.</p>
+    <p><a class="btn" href="cairn-kit.zip" download>Get the kit</a></p>
+  </section>
+
+  <section class="panel" id="panel-builder" tabindex="-1" aria-labelledby="t-builder">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the builder&rsquo;s corner</span>
+      <h2 id="t-builder">What&rsquo;s behind this board</h2>
+
+      <p>Cairn isn&rsquo;t a company, and this page isn&rsquo;t a pitch. It&rsquo;s a
+      <strong>work sample</strong> &mdash; the pattern extracted from a knowledge system I
+      built and operate every day, genericized so anyone can run it. The site exists to
+      show how I think and what I ship.</p>
+
+      <ul class="bstat-list mono" aria-label="The source system, in numbers">
+        <li><strong>69</strong> skills in the source system</li>
+        <li><strong>5</strong> agent roles with written boundaries</li>
+        <li><strong>1</strong> custom MCP server, built on Anthropic&rsquo;s SDK</li>
+        <li><strong>~50</strong> API endpoints behind one auth layer</li>
+      </ul>
+
+      <h3>The habits that carried into the kit</h3>
+      <ul class="ruled">
+        <li><strong>Writes wait for a human.</strong> The approval gate exists because my
+        first version failed: approvals lived in memory with a ten-minute expiry, so a
+        restart silently dropped them and my phone never saw them. The redesign &mdash;
+        durable files, notification on creation, resolvable from anywhere &mdash; is the
+        one in the kit.</li>
+        <li><strong>Nothing is ever deleted.</strong> The log is append-only; corrections
+        are new entries. An audit trail you can edit isn&rsquo;t an audit trail.</li>
+        <li><strong>A skill isn&rsquo;t a prompt.</strong> Every one ships a written
+        procedure, declared parameters, and an acceptance test &mdash; so quality
+        doesn&rsquo;t depend on typing the right words on the right day.</li>
+        <li><strong>The system reports its own blind spots.</strong> Scheduled checks
+        diagnose stale indexes, capped batches, and gated actions with no approval line
+        &mdash; and flag them instead of waiting to be asked.</li>
+      </ul>
+
+      <h3>Before the AI work</h3>
+      <p>I ran Microsoft 365 for a ~700-person organization in <strong>GCC High</strong>,
+      under <strong>CMMC and NIST 800-171</strong> &mdash; identity, permissions,
+      compliance, and training people through change. The taped photo on this board is
+      where that background and the AI work meet.</p>
+
+      <p class="panel-note annot annot--plain annot--ink">Those are the two halves of
+      putting AI into a business safely &mdash; and the point of this board is that
+      I&rsquo;ve done both.</p>
+
+      <ul class="footer-links panel-pending">
+        <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
+        <li><span class="pending">Contact<span class="tag">pending</span></span></li>
+        <li><a href="https://github.com/croquebytes/cairn">GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-loop" tabindex="-1" aria-labelledby="t-loop">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the loop, drawn on the board</span>
+      <h2 id="t-loop">How it works</h2>
+
+      <div class="flow flow--panel">
+        <div class="flow-box rot-p1"><h3>CAPTURE</h3><p>everything lands in one inbox</p></div>
+        <div class="flow-box rot-n2"><h3>CURATE</h3><p>worth keeping? promote it &mdash; duplicates get archived</p></div>
+        <div class="flow-box rot-p2"><h3>OPERATE</h3><p>skills do the work; a human approves anything that writes</p></div>
+        <div class="flow-box flow-box--audit rot-n1"><h3>AUDIT</h3><p>append-only log of everything that happened</p></div>
+      </div>
+
+      <ul class="ruled ruled--annot">
+        <li><span class="annot">files, not a database</span> &mdash; the whole system is
+        markdown you can read, grep, and version. No export day, ever.</li>
+        <li><span class="annot">AI drafts, a human sends</span> &mdash; anything that
+        writes outward waits at the approval gate. Five words, one governance policy.</li>
+        <li><span class="annot">nothing is ever deleted</span> &mdash; archive, don&rsquo;t
+        destroy. The chronicle is append-only by design.</li>
+      </ul>
+
+      <p class="panel-note">This is the loop I actually run &mdash; the kit ships it as
+      five core skills and two agent roles, ready to tailor.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-kit" tabindex="-1" aria-labelledby="t-kit">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the yellow sticky</span>
+      <h2 id="t-kit">Starter kit &mdash;
+        <span class="underline-marker underline-marker--green">running in 10 minutes, no API key</span></h2>
+
+      <p>A zip of markdown files and three shell scripts. Unzip it, run
+      <code class="mono">init.sh</code>, and a plain POSIX script validates the vault and
+      prints a health report. The first success involves no model, no key, and no
+      account &mdash; deliberately, so the structure earns trust before any AI touches it.</p>
+
+      <pre class="cmd"><span class="prompt">$</span> ./scripts/init.sh
+<span class="prompt">$</span> ./scripts/check.sh   <span class="comment"># exit 0 = healthy vault</span></pre>
+
+      <p class="panel-note">That ten-minute claim isn&rsquo;t copy &mdash; it was tested
+      from a fresh unzip, and <code class="mono">check.sh</code> refuses to package a
+      broken vault.</p>
+
+      <p class="panel-actions">
+        <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+        <a class="btn btn--ghost" href="the-kit.html">the full quickstart &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-skills" tabindex="-1" aria-labelledby="t-skills">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the blue sticky</span>
+      <h2 id="t-skills">Skill catalog</h2>
+
+      <p><strong>A skill isn&rsquo;t a prompt.</strong> Every catalog item ships three
+      files &mdash; a written procedure, declared parameters, and an acceptance test
+      &mdash; so deploying it for the next person is configuration, not rework.</p>
+
+      <p>The method comes from the source system, where 69 skills run this way. The kit
+      ships eight of them, genericized: ingestion, curation, health checks, chronicle
+      writing, and the rest of the loop&rsquo;s moving parts.</p>
+
+      <p class="panel-note">The acceptance test is the part most people skip &mdash; and
+      the part that makes a skill deployable to a client instead of demoable to a
+      room.</p>
+
+      <p class="panel-actions">
+        <a class="btn btn--ghost" href="the-kit.html#catalog">all eight skills &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-rules" tabindex="-1" aria-labelledby="t-rules">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the guardrail stickies</span>
+      <h2 id="t-rules">Guardrails</h2>
+
+      <ul class="ruled">
+        <li><strong>Approval gate</strong> &mdash; writes wait for a human, and the wait
+        itself is logged before anything happens. Autonomy earns trust by being
+        interruptible.</li>
+        <li><strong>Health checks</strong> &mdash; a stale routing index, a batch that
+        stopped at a cap and was never finished, two notes that quietly became
+        duplicates, a gated action with no matching approval line. The vault names its
+        own findings rather than waiting to be asked.</li>
+        <li><strong>One vault, many AIs</strong> &mdash; two adapter files sit over one
+        rulebook. A new runtime means a new adapter, not a reorganized vault &mdash;
+        curate once, serve every assistant.</li>
+        <li><strong>Hard limits</strong> &mdash; autonomous skills carry an item cap and
+        an error cap, so a misbehaving run stops itself instead of running away.</li>
+      </ul>
+
+      <p class="panel-note">Every one of these exists because something went wrong once
+      in the source system and I decided it would never go wrong silently again.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-m365" tabindex="-1" aria-labelledby="t-m365">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the taped photo</span>
+      <h2 id="t-m365">Works in Microsoft&nbsp;365</h2>
+
+      <svg viewBox="0 0 480 322" role="img" aria-labelledby="m365-t m365-d" class="map-svg">
+        <title id="m365-t">The vault pattern mapped onto Microsoft 365</title>
+        <desc id="m365-d">Five vault concepts on the left, each with a marker arrow to its native Microsoft 365 equivalent on the right: markdown files to a SharePoint library, YAML frontmatter to metadata columns, an append-only log to a list plus the audit log, the approval gate to an approval in Teams, and git history to version history.</desc>
+        <text x="94" y="14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" letter-spacing="1.4" class="f-soft">THE VAULT</text>
+        <text x="386" y="14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" letter-spacing="1.4" class="f-soft">YOUR TENANT</text>
+        <g filter="url(#marker-fine)" class="f-paper s-ink" stroke-width="2.2">
+          <rect x="6" y="28"  width="176" height="44" rx="3"/>
+          <rect x="6" y="86"  width="176" height="44" rx="3"/>
+          <rect x="6" y="144" width="176" height="44" rx="3"/>
+          <rect x="6" y="202" width="176" height="44" rx="3"/>
+          <rect x="6" y="260" width="176" height="44" rx="3"/>
+          <rect x="298" y="28"  width="176" height="44" rx="3"/>
+          <rect x="298" y="86"  width="176" height="44" rx="3"/>
+          <rect x="298" y="144" width="176" height="44" rx="3"/>
+          <rect x="298" y="202" width="176" height="44" rx="3"/>
+          <rect x="298" y="260" width="176" height="44" rx="3"/>
+        </g>
+        <g filter="url(#marker)" class="f-none s-blue" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M188 50c26-5 62-5 100 0"/><path d="M279 44l10 6-10 6"/>
+          <path d="M188 108c26 5 62 5 100 0"/><path d="M279 102l10 6-10 6"/>
+          <path d="M188 166c26-5 62-5 100 0"/><path d="M279 160l10 6-10 6"/>
+          <path d="M188 224c26 4 62 4 100 0"/><path d="M279 218l10 6-10 6"/>
+          <path d="M188 282c26-4 62-4 100 0"/><path d="M279 276l10 6-10 6"/>
+        </g>
+        <g font-family="Plus Jakarta Sans, sans-serif" font-size="15" class="f-ink">
+          <text x="20" y="55">Markdown files</text>
+          <text x="20" y="113">YAML frontmatter</text>
+          <text x="20" y="171">Append-only log</text>
+          <text x="20" y="229">Approval gate</text>
+          <text x="20" y="287">Git history</text>
+          <text x="312" y="55">SharePoint library</text>
+          <text x="312" y="113">Metadata columns</text>
+          <text x="312" y="171">List + audit log</text>
+          <text x="312" y="229">Approval in Teams</text>
+          <text x="312" y="287">Version history</text>
+        </g>
+      </svg>
+
+      <p>Nothing to buy. A tenant already ships a file store with metadata, versioning,
+      permissions, approvals and an audit log &mdash; the pattern lands on what&rsquo;s
+      already licensed.</p>
+
+      <p class="panel-note">This mapping is where my two halves meet: running a
+      compliance-bound Microsoft 365 environment, and building AI systems with
+      guardrails. It&rsquo;s the same discipline in both directions.</p>
+
+      <p class="panel-actions">
+        <a class="btn btn--ghost" href="in-your-tenant.html">the full mapping &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-principle" tabindex="-1" aria-labelledby="t-principle">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the torn page</span>
+      <h2 id="t-principle">The principle</h2>
+
+      <blockquote class="panel-quote">The vault is a pattern, not a product. Your
+      knowledge should outlive your tools.</blockquote>
+
+      <p>That&rsquo;s why this site sells nothing. The kit is MIT-licensed markdown and
+      shell scripts; the mapping page shows how the same pattern lands on a Microsoft 365
+      tenant with nothing new to buy. If the tools change next year &mdash; and they will
+      &mdash; the vault doesn&rsquo;t care.</p>
+
+      <p class="panel-note">It&rsquo;s also why the board you&rsquo;re looking at is a
+      work sample rather than a landing page: the interesting thing was never the
+      product. It&rsquo;s the thinking, written down, in a form you can run.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer footer--flat">
+  <div class="board">
+    <p class="tray-meta tray-line">
+      &copy; 2026 Cairn &nbsp;&middot;&nbsp; <strong>A pattern, not a product.</strong>
+      &nbsp;&middot;&nbsp; MIT licensed
+    </p>
+  </div>
+</footer>
+
+<script src="assets/board.js?v=20260827e" defer></script>
+<script src="assets/scene.js?v=20260827e" defer></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Under the hood — Cairn</title>
-<meta name="description" content="A factual tour of the private Machine Dreams system, the MDash control plane over it, and Cairn&rsquo;s de-identified public kit.">
+<meta name="description" content="A factual tour of the private working vault, the local dashboard over it, and Cairn&rsquo;s de-identified public kit.">
 <meta name="theme-color" content="#FAFAF7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,19 +72,19 @@
 </section>
 
 <section class="board section section--identity" aria-labelledby="identity-title">
-  <h2 class="sr-only" id="identity-title">Machine Dreams, MDash, and Cairn</h2>
+  <h2 class="sr-only" id="identity-title">The working vault, local dashboard, and Cairn</h2>
   <div class="identity-grid">
     <article class="identity-card identity-card--system">
       <small class="identity-kicker">the working system</small>
-      <h3>Machine Dreams</h3>
-      <p>The private second-brain system: a vault of durable files, rules, skills, roles, and routines.</p>
+      <h3>The working vault</h3>
+      <p>The private second-brain system I use every day: durable files, rules, skills, roles, and routines.</p>
       <small class="identity-status">private &middot; used daily</small>
     </article>
     <article class="identity-card identity-card--surface">
-      <small class="identity-kicker">the control plane</small>
-      <h3>MDash</h3>
-      <p>Operates that vault through ingest, review, search, chat, jobs, and projects. Writes are gated.</p>
-      <small class="identity-status">local &middot; same vault</small>
+      <small class="identity-kicker">the operating surface</small>
+      <h3>The local dashboard</h3>
+      <p>Operates the same files through ingest, review, search, chat, jobs, and projects. Writes are gated.</p>
+      <small class="identity-status">local &middot; same files</small>
     </article>
     <article class="identity-card identity-card--public">
       <small class="identity-kicker">the public cutaway</small>
@@ -256,13 +256,13 @@ checklist.md  <span class="comment"># acceptance checks</span>
   </div>
 </section>
 
-<!-- ============================================== 03 MDASH CONTROL PLANE ==== -->
+<!-- =============================================== 03 LOCAL CONTROL PLANE ==== -->
 <section class="board section">
   <div class="section-head">
-    <span class="section-num">03 &mdash; MDash, the control plane</span>
-    <h2 class="rot-p1">MDash makes the vault usable day to day</h2>
+    <span class="section-num">03 &mdash; the local control plane</span>
+    <h2 class="rot-p1">The dashboard makes the vault usable day to day</h2>
     <p class="section-lead">
-      MDash is the local web control plane over the same files: roughly fifty endpoints, a
+      It is a local web control plane over the same files: roughly fifty endpoints, a
       chat surface, retrieval, scheduling, projects, and a usage ledger. The important
       decisions are operational; they make the system easier to inspect, secure, and recover.
     </p>
@@ -325,7 +325,7 @@ checklist.md  <span class="comment"># acceptance checks</span>
     <span class="section-num">04 &mdash; shared tool schema</span>
     <h2 class="rot-n1">One tool schema, two execution paths</h2>
     <p class="section-lead">
-      MDash exposes the vault to in-app chat and external AI tools. One canonical tool-schema
+      The local app exposes the vault to in-app chat and external AI tools. One canonical tool-schema
       module defines both surfaces: chat binds it to in-process handlers, while MCP binds it to
       a token-authenticated ops API. They converge on the same vault rules and helpers, but they
       do not take the same execution path.

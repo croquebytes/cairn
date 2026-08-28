@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Under the hood — Cairn</title>
+<meta name="description" content="The depth behind the pattern: how the vault is laid out, what the operator layer actually enforces, the app and API surfaces over it, and where the pattern goes next at client scale.">
+<meta name="theme-color" content="#FAFAF7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/board.css?v=20260828b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" class="defs">
+  <filter id="marker" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="marker-fine" x="-12%" y="-12%" width="124%" height="124%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n2"/>
+    <feDisplacementMap in="SourceGraphic" in2="n2" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="nav">
+  <div class="board nav-inner">
+    <a class="wordmark" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" filter="url(#marker-fine)">
+          <ellipse cx="16" cy="24" rx="11" ry="4"/>
+          <ellipse cx="16" cy="16.5" rx="8" ry="3.4"/>
+          <ellipse cx="16" cy="9.5" rx="5" ry="2.8"/>
+        </g>
+      </svg>
+      Cairn
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="index.html#panel-loop">How it works</a></li>
+        <li><a href="under-the-hood.html" aria-current="page">Under the hood</a></li>
+        <li><a href="in-your-tenant.html">In your tenant</a></li>
+        <li><a href="the-kit.html">The kit</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="board page-head">
+  <span class="eyebrow">the long version</span>
+  <h1 class="rot-n1">Everything above the files is
+    <span class="circled">replaceable.<svg viewBox="0 0 400 130" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M196 8C112 5 34 22 16 52c-18 30 34 62 148 68 106 6 218-14 233-46 13-28-52-56-160-63-38-2-77-1-112 3"/></svg></span>
+  </h1>
+  <p class="section-lead">
+    The front board is the short version. This page is the build underneath it: how the
+    vault is actually laid out, what the operator layer enforces, the app and the API
+    surfaces that sit over it, and the parts I got wrong first. It ends with where the
+    pattern goes next &mdash; clearly labelled, because that part isn&rsquo;t built yet.
+  </p>
+  <p class="annot annot--plain annot--ink">
+    Written from a system I&rsquo;ve run daily for about two years. Cairn is the pattern
+    extracted from it, with the personal content stripped out.
+  </p>
+</section>
+
+<!-- ================================================== 01 ANATOMY ========= -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">01 &mdash; the anatomy</span>
+    <h2 class="rot-p1">Four layers, and only one of them has to survive</h2>
+    <p class="section-lead">
+      Every architectural decision in here comes from one commitment: the files are the
+      truth, and everything that operates on them is a tenant, not a landlord.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-8">
+      <svg viewBox="0 0 520 340" role="img" aria-labelledby="stack-t stack-d" class="map-svg">
+        <title id="stack-t">The four layers of the system</title>
+        <desc id="stack-d">Four stacked boxes. From the bottom: files, the rulebook, the operator layer of agents and skills, and the surfaces that people and tools use. A brace on the right marks the top three layers as replaceable; the bottom layer is marked as the part that must survive.</desc>
+
+        <g filter="url(#marker)" class="f-paper s-ink" stroke-width="2.4">
+          <rect x="10" y="14"  width="330" height="62" rx="4"/>
+          <rect x="10" y="96"  width="330" height="62" rx="4"/>
+          <rect x="10" y="178" width="330" height="62" rx="4"/>
+        </g>
+        <g filter="url(#marker)" class="f-white s-ink" stroke-width="3.2">
+          <rect x="10" y="260" width="330" height="66" rx="4"/>
+        </g>
+
+        <g font-family="Plus Jakarta Sans, sans-serif" class="f-ink">
+          <text x="30" y="42" font-size="17" font-weight="700">SURFACES</text>
+          <text x="30" y="64" font-size="13.5" class="f-soft">chat · MCP · scheduled jobs · the app</text>
+          <text x="30" y="124" font-size="17" font-weight="700">OPERATOR</text>
+          <text x="30" y="146" font-size="13.5" class="f-soft">agent roles with written boundaries · skills</text>
+          <text x="30" y="206" font-size="17" font-weight="700">RULES</text>
+          <text x="30" y="228" font-size="13.5" class="f-soft">one rulebook · adapters per runtime</text>
+          <text x="30" y="290" font-size="17" font-weight="700">FILES</text>
+          <text x="30" y="312" font-size="13.5" class="f-soft">markdown + frontmatter · the source of truth</text>
+        </g>
+
+        <g filter="url(#marker)" class="f-none s-blue" stroke-width="2.2" stroke-linecap="round">
+          <path d="M356 20c14 0 14 100 28 100-14 0-14 100-28 100"/>
+          <path d="M356 272h34"/>
+          <path d="M382 266l10 6-10 6"/>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="12" class="f-soft">
+          <text x="398" y="112">swap any</text>
+          <text x="398" y="130">of these</text>
+          <text x="398" y="278">keep this</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="col-8-13">
+      <div class="stack-3">
+        <div>
+          <p class="note-title">Files</p>
+          <p>Markdown with YAML frontmatter. Readable by a person, greppable by a script,
+          diffable by git, and portable with nothing but a text editor. There is no export
+          day, because there is nothing to export from.</p>
+        </div>
+        <div>
+          <p class="note-title">Rules</p>
+          <p>One rulebook the whole system obeys: what may be written where, what has to be
+          approved first, what is archived rather than deleted. Per-runtime adapter files
+          point a given AI tool at that same rulebook &mdash; a new runtime is a new adapter,
+          not a reorganised vault.</p>
+        </div>
+        <div>
+          <p class="note-title">Operator</p>
+          <p>Agent roles, each with a written boundary describing what it may do, what it
+          must never do, and what it escalates. Skills are the verbs those roles use.</p>
+        </div>
+        <div>
+          <p class="note-title">Surfaces</p>
+          <p>Whatever is convenient this year. A chat window, an MCP client, a scheduled job,
+          a web app. Surfaces are the most likely thing to change and the least expensive
+          thing to lose.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--blue">
+    <span class="callout-label">Why a routing index instead of search</span>
+    <p>An agent that has to search for where things live will eventually guess wrong and
+    write to the wrong place. A routing index is a single map file that tells it where each
+    kind of thing belongs, so placement is a lookup rather than an inference. It also gives
+    the health check something to verify against &mdash; a stale index is a finding, where a
+    bad guess is just a mess someone finds later.</p>
+  </div>
+</section>
+
+<!-- ================================================ 02 OPERATOR ========== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">02 &mdash; the operator layer</span>
+    <h2 class="rot-n1">A skill is a procedure. A boundary is a sentence you can quote back.</h2>
+    <p class="section-lead">
+      The operator layer is where autonomy gets its limits. Two mechanisms carry most of
+      the weight: what a skill has to contain before it ships, and what an agent is
+      allowed to reach.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-5">
+      <div class="note note--blue rot-p2">
+        <p class="note-title">Every skill, three files</p>
+        <p>A procedure written in plain language, the parameters a deployer edits, and an
+        acceptance test that includes the failure paths and an I&rsquo;d-rather-not-answer
+        case. The health check treats a missing one as an error, so an untested skill
+        can&rsquo;t quietly ship.</p>
+      </div>
+    </div>
+    <div class="col-5-9">
+      <div class="note note--redline rot-n1">
+        <p class="note-title">Every autonomous run, three caps</p>
+        <p>An item cap, so a batch can&rsquo;t run away. An error cap, so a run that has
+        started failing stops instead of grinding. And no recursion &mdash; a skill never
+        calls itself. Three limits, written once, loaded by every scheduled skill.</p>
+      </div>
+    </div>
+    <div class="col-9-13">
+      <div class="note note--green rot-p1">
+        <p class="note-title">Every write, a gate</p>
+        <p>Anything that sends or writes outward waits for a human. The wait itself is
+        logged before the action happens, so the record shows intent as well as outcome.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--red">
+    <span class="callout-label">The version that failed, because it is the useful half of the story</span>
+    <p>My first approval gate kept pending approvals in memory with a ten-minute expiry.
+    A restart dropped them silently, my phone never saw them, and the window closed before
+    I could act on anything I hadn&rsquo;t been sitting in front of. The rebuild made them
+    durable files with a notification on creation, resolvable from anywhere, expiring in
+    seven days.</p>
+    <p>The lesson is the part I actually kept: <strong>a safety feature that is
+    inconvenient becomes a safety feature people route around.</strong> Every guardrail on
+    this page is designed to be cheap to comply with, because the alternative isn&rsquo;t
+    a stricter system &mdash; it&rsquo;s a bypassed one.</p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-8">
+      <p class="note-title">Roles, not one omniscient assistant</p>
+      <p>The system runs a handful of named roles rather than a single agent with every
+      permission. One ingests, one curates and promotes, one goes looking for new material,
+      one writes the narrative record, one keeps the house in order. Each has a written
+      boundary file, and the boundaries are quotable &mdash; when something goes wrong, the
+      question &ldquo;which role did this and was it allowed to?&rdquo; has an answer
+      rather than a shrug.</p>
+      <p>That structure is the same reason least privilege works in a tenant. It isn&rsquo;t
+      about distrust. It&rsquo;s that a bounded actor produces a legible failure.</p>
+    </div>
+    <div class="col-8-13">
+      <div class="cmd">
+<span class="comment"># what ships with a catalog skill</span>
+skill.md      <span class="comment"># the procedure</span>
+params.md     <span class="comment"># what a deployer edits</span>
+acceptance.md <span class="comment"># incl. failure paths</span>
+
+<span class="prompt">$</span> ./scripts/check.sh
+<span class="comment"># missing any of the three = error</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================= 03 THE APP =========== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">03 &mdash; the app over it</span>
+    <h2 class="rot-p1">Boring choices, made early, in the places that hurt later</h2>
+    <p class="section-lead">
+      The dashboard is a web app over the same files &mdash; roughly fifty endpoints, a
+      chat surface, retrieval, scheduling, and a usage ledger. Almost none of what
+      I&rsquo;d defend about it is a feature. It&rsquo;s the handful of decisions that
+      decide whether someone else can support it at two in the morning.
+    </p>
+  </div>
+
+  <div class="board-table-wrap">
+    <table class="board-table">
+      <thead>
+        <tr><th>The decision</th><th>What it prevents</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Two API surfaces &mdash; an interactive one and a token-authenticated ops one</td>
+          <td>An automation credential wandering into the interactive surface. Different auth, different blast radius.</td>
+        </tr>
+        <tr>
+          <td>The API spec is generated from the code that serves the routes</td>
+          <td>Documentation drifting from behaviour. Same instinct as as-built docs, enforced by the build instead of by discipline.</td>
+        </tr>
+        <tr>
+          <td>Cross-origin writes blocked once, in middleware, using fetch metadata</td>
+          <td>A new route shipping without the check. A control you cannot forget to add beats one you have to remember.</td>
+        </tr>
+        <tr>
+          <td>Path containment in two independent layers &mdash; sanitise the segment, then verify the resolved path is inside the vault</td>
+          <td>A crafted filename escaping the vault. One layer is a single point of failure.</td>
+        </tr>
+        <tr>
+          <td>Writes go to a temp file and get renamed into place</td>
+          <td>A half-written file if the process dies mid-write. The rename is the commit.</td>
+        </tr>
+        <tr>
+          <td>Work items are claimed with an exclusive-create lockfile</td>
+          <td>Two agents grabbing the same job. The filesystem arbitrates instead of a race.</td>
+        </tr>
+        <tr>
+          <td>Approvals are files, not rows in memory</td>
+          <td>Losing a pending decision on restart &mdash; the failure that taught me the rule.</td>
+        </tr>
+        <tr>
+          <td>Every operation appends to a usage ledger with an estimated cost and a flag for whether the estimate is measured or inferred</td>
+          <td>A confident wrong number. &ldquo;What is this costing us&rdquo; is the month-two question, and an honest range beats a precise fiction.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--blue">
+    <span class="callout-label">The one I get asked about most</span>
+    <p>The token requirement on the ops surface shipped <em>disabled</em>, with a documented
+    migration path, and was switched on afterwards. Enabling it cold would have broken every
+    existing caller, and the fastest route back to working would have been a bypass &mdash;
+    which is how a security control becomes a permanent exception. Sequencing is part of the
+    control. I would rather explain a deliberate order than defend an outage.</p>
+  </div>
+</section>
+
+<!-- ================================================= 04 ONE DEFINITION ==== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">04 &mdash; one definition, many surfaces</span>
+    <h2 class="rot-n1">The integration decision I&rsquo;d make again on someone else&rsquo;s tenant</h2>
+    <p class="section-lead">
+      I built an MCP server so the vault could be operated from more than one AI tool
+      without rewriting the integration each time. Two choices inside it matter far more
+      than the server itself.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-8">
+      <svg viewBox="0 0 560 300" role="img" aria-labelledby="mcp-t mcp-d" class="map-svg">
+        <title id="mcp-t">One tool definition serving three surfaces through one authenticated API</title>
+        <desc id="mcp-d">A single shared definitions module feeds three surfaces: an MCP server, the in-app chat, and scheduled jobs. All three route their calls through one authenticated API, which is the only thing that touches the vault.</desc>
+
+        <g filter="url(#marker)" class="f-white s-ink" stroke-width="2.8">
+          <rect x="170" y="8" width="220" height="50" rx="4"/>
+        </g>
+        <text x="280" y="32" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="700" class="f-ink">one definitions module</text>
+        <text x="280" y="49" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" class="f-soft">imported, never copied</text>
+
+        <g filter="url(#marker)" class="f-none s-ink" stroke-width="2.2" stroke-linecap="round">
+          <path d="M235 60c-60 10-100 20-135 34"/>
+          <path d="M280 60v34"/>
+          <path d="M325 60c60 10 100 20 135 34"/>
+        </g>
+
+        <g filter="url(#marker)" class="f-paper s-ink" stroke-width="2.2">
+          <rect x="16"  y="98" width="150" height="46" rx="4"/>
+          <rect x="205" y="98" width="150" height="46" rx="4"/>
+          <rect x="394" y="98" width="150" height="46" rx="4"/>
+        </g>
+        <g font-family="Plus Jakarta Sans, sans-serif" font-size="14" text-anchor="middle" class="f-ink">
+          <text x="91"  y="127">MCP server</text>
+          <text x="280" y="127">in-app chat</text>
+          <text x="469" y="127">scheduled jobs</text>
+        </g>
+
+        <g filter="url(#marker)" class="f-none s-blue" stroke-width="2.4" stroke-linecap="round">
+          <path d="M91 146c0 30 60 30 180 34"/>
+          <path d="M280 146v32"/>
+          <path d="M469 146c0 30-60 30-180 34"/>
+          <path d="M272 172l10 8-10 8"/>
+        </g>
+
+        <g filter="url(#marker)" class="f-white s-ink" stroke-width="2.8">
+          <rect x="150" y="186" width="260" height="50" rx="4"/>
+        </g>
+        <text x="280" y="210" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="700" class="f-ink">the authenticated API</text>
+        <text x="280" y="227" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" class="f-soft">auth · rules · audit, in one place</text>
+
+        <g filter="url(#marker)" class="f-none s-ink" stroke-width="2.4" stroke-linecap="round">
+          <path d="M280 238v22"/>
+          <path d="M272 252l8 10 8-10"/>
+        </g>
+        <g filter="url(#marker)" class="f-paper s-ink" stroke-width="2.4">
+          <rect x="205" y="262" width="150" height="34" rx="4"/>
+        </g>
+        <text x="280" y="284" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="700" class="f-ink">the vault</text>
+      </svg>
+    </div>
+
+    <div class="col-8-13">
+      <div class="stack-3">
+        <div>
+          <p class="note-title">One definition, imported twice</p>
+          <p>The tool definitions live in a single module that both the MCP server and the
+          app&rsquo;s own chat layer import. Two definitions of the same tools drift, and
+          drift shows up as an agent calling a tool with arguments that work on one surface
+          and fail on the other &mdash; a bug that looks like the model misbehaving when
+          it&rsquo;s actually the plumbing disagreeing with itself.</p>
+        </div>
+        <div>
+          <p class="note-title">Every call through the front door</p>
+          <p>No surface touches the files directly. Everything routes through the
+          authenticated API, so an action taken over MCP is authorised, validated and
+          audited exactly like one taken in the interface. Security and business logic
+          can&rsquo;t fork by entry point, because there is only one entry point.</p>
+        </div>
+        <div class="callout callout--red">
+          <span class="callout-label">And when not to build one</span>
+          <p>If a first-party connector already covers it, use that. A custom server is code
+          you have signed a client up to maintain, and &ldquo;we built our own&rdquo; ages
+          badly the quarter the vendor ships the same thing. The scoping question I&rsquo;d
+          raise in discovery is the unglamorous one: who owns this after go-live?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================= 05 HONESTY =========== -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">05 &mdash; how it stays honest</span>
+    <h2 class="rot-p1">A system that only accumulates is a folder</h2>
+    <p class="section-lead">
+      Two loops run on top of each other. The knowledge loop decides what is worth keeping.
+      The improvement loop decides whether a change to the system itself was any good.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-8">
+      <div class="stack-3">
+        <div>
+          <p class="note-title">Novelty before storage</p>
+          <p>Findings are checked against what the vault already holds before anything is
+          filed. Duplicates are archived, not stored twice. The point of a second brain is
+          not volume.</p>
+        </div>
+        <div>
+          <p class="note-title">Confidence caps on secondhand sources</p>
+          <p>When a primary source is unreachable, the working alternative is recorded
+          <em>with a cap on how much it can be trusted</em>, so a summary of a summary never
+          gets filed as though it were vendor documentation. Provenance is part of the note,
+          not a footnote.</p>
+        </div>
+        <div>
+          <p class="note-title">Blind spots get raised, not waited on</p>
+          <p>When a research topic goes quiet, the system distinguishes between
+          &ldquo;nothing new exists&rdquo; and &ldquo;my method for looking is failing,&rdquo;
+          recommends a change, and flags it. Most monitoring reports what it found. The
+          useful part is being told what you might be missing.</p>
+        </div>
+        <div>
+          <p class="note-title">Changes are proposed, tested, then logged either way</p>
+          <p>The improvement loop doesn&rsquo;t trust its own suggestions. A proposed change
+          to configuration gets tested before adoption, and the outcome is recorded whether
+          it worked or not &mdash; which is the only way the log stays worth reading.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-8-13">
+      <div class="note note--white rot-n1">
+        <p class="note-title">What the health check actually looks for</p>
+        <p class="note-sub">Not uptime. The quiet rot:</p>
+        <ul class="stack-1">
+          <li>a routing index that no longer matches what is on disk</li>
+          <li>a batch that stopped at its cap and was never resumed</li>
+          <li>two notes that have quietly become duplicates</li>
+          <li>a gated action with no matching approval line &mdash; the serious one</li>
+        </ul>
+        <p class="note-sub">The last one is the finding that matters, because it means
+        something wrote without waiting. The system names it rather than waiting to be
+        asked.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--blue">
+    <span class="callout-label">Why append-only, everywhere</span>
+    <p>Corrections are new entries, never edits. It costs storage and buys the only thing
+    that makes a log worth having: an audit trail you can edit isn&rsquo;t an audit trail.
+    The same argument is why the vault archives instead of deleting &mdash; you can always
+    ignore a record you kept, and never recover one you didn&rsquo;t.</p>
+  </div>
+</section>
+
+<!-- ================================================= 06 WHAT'S NEXT ======= -->
+<section class="board section">
+  <div class="section-head">
+    <span class="section-num">06 &mdash; where it goes next</span>
+    <h2 class="rot-n1">Six moves from a system that serves one person to one that serves a practice</h2>
+    <p class="section-lead">
+      Everything above this line is running. Everything below it is design &mdash; the
+      honest distinction, kept in the open, because a plan described in the present tense
+      is just a lie with good posture.
+    </p>
+  </div>
+
+  <div class="callout callout--red">
+    <span class="callout-label">The gap, said plainly</span>
+    <p>This is a single-operator system. It authenticates with a static token because there
+    is exactly one person to authenticate. Everything in this section is what would have to
+    change before it belonged in someone else&rsquo;s environment &mdash; and knowing that
+    list precisely is not the same as having built it.</p>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-5">
+      <div class="note note--blue rot-p1">
+        <p class="note-title">1 &middot; Identity, not a token</p>
+        <p>The static token becomes federated identity: every action attributes to a person,
+        access is granted by group rather than by secret, and revocation is central and
+        immediate. Approvals route to a <em>role</em> rather than to me, so the gate
+        survives someone being on holiday.</p>
+      </div>
+    </div>
+    <div class="col-5-9">
+      <div class="note note--green rot-n2">
+        <p class="note-title">2 &middot; One catalog, many tenants</p>
+        <p>The skill catalog stays central; each client gets a parameter file rather than a
+        fork. Deploying an existing capability to the next client becomes configuration and
+        an acceptance-test run &mdash; not a rebuild, and not a copy that starts drifting
+        the day it lands.</p>
+      </div>
+    </div>
+    <div class="col-9-13">
+      <div class="note note--white rot-p2">
+        <p class="note-title">3 &middot; The baseline as a deliverable</p>
+        <p>Every engagement ends with an approved configuration recorded as files. The drift
+        loop already knows how to compare reality to a baseline; pointed at a tenant, it
+        turns &ldquo;is this still how we left it?&rdquo; into a scheduled answer instead of
+        an annual audit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-1-5">
+      <div class="note note--white rot-n1">
+        <p class="note-title">4 &middot; The change feed, pointed outward</p>
+        <p>The machinery that watches research topics and diagnoses its own blind spots is
+        the same machinery a delivery team needs pointed at vendor release notes and tenant
+        message centres &mdash; so a breaking platform change reaches the people who deploy
+        on it before it reaches a client who depends on it.</p>
+      </div>
+    </div>
+    <div class="col-5-9">
+      <div class="note note--blue rot-p2">
+        <p class="note-title">5 &middot; Evaluation as a regression suite</p>
+        <p>Acceptance tests already exist per skill. Run the whole set on a schedule and
+        whenever a model version changes, and &ldquo;the model updated&rdquo; stops being a
+        surprise and becomes a test result. That is the difference between managing an AI
+        deployment and hoping about one.</p>
+      </div>
+    </div>
+    <div class="col-9-13">
+      <div class="note note--green rot-n1">
+        <p class="note-title">6 &middot; Cost as a first-class dimension</p>
+        <p>The usage ledger already records estimated cost per operation and marks whether
+        the number is measured or inferred. Segmented by client and use case, that becomes
+        the answer to the question every engagement gets in month two &mdash; and the input
+        to routing cheap work to cheaper models.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--blue">
+    <span class="callout-label">The one I find most interesting</span>
+    <p>Follow the logic far enough and the delivery artefacts and the knowledge system stop
+    being two things. An engagement&rsquo;s as-built configuration, the decisions behind it,
+    the approvals, the drift findings and the runbooks are all just curated notes with
+    provenance and a date &mdash; which is exactly what the vault is for. Put that substrate
+    in the client&rsquo;s own tenant, where it is already licensed and already governed, and
+    the documentation stops being a deliverable that rots after handover and starts being
+    the live record of the system.</p>
+    <p>That is the same pattern as the mapping page, aimed one level up: not
+    &ldquo;here is where the AI&rsquo;s knowledge lives,&rdquo; but <strong>&ldquo;here is
+    where the engagement itself lives.&rdquo;</strong></p>
+  </div>
+</section>
+
+<!-- ==================================================== CLOSE ============= -->
+<section class="board section--tight">
+  <div class="principle-wrap">
+    <div class="tape tape--top"></div>
+    <div class="torn rot-n1">
+      <blockquote>
+        Build it so the next person can operate it, and most of the architecture
+        decides itself.
+      </blockquote>
+      <cite>&mdash; the working version of the principle</cite>
+    </div>
+  </div>
+
+  <div class="cta-side">
+    <a class="btn" href="cairn-kit.zip" download>Get the kit</a>
+    <a class="btn btn--ghost" href="in-your-tenant.html">See it mapped to Microsoft&nbsp;365 &rarr;</a>
+    <a class="btn btn--ghost" href="index.html#panel-ask">Questions worth asking &rarr;</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="board">
+    <ul class="footer-links">
+      <li><a href="https://github.com/croquebytes/cairn">GitHub repo</a></li>
+      <li><a href="cairn-kit.zip" download>Get the kit</a></li>
+      <li><span class="pending">Contact<span class="tag">pending</span></span></li>
+      <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
+    </ul>
+  </div>
+
+  <div class="board">
+    <div class="tray">
+      <p class="tray-meta tray-line">
+        &copy; 2026 Cairn &nbsp;&middot;&nbsp; <strong>A pattern, not a product.</strong>
+        &nbsp;&middot;&nbsp; MIT licensed
+      </p>
+      <svg width="240" height="62" viewBox="0 0 240 62" aria-hidden="true" focusable="false">
+        <g filter="url(#marker-fine)" class="s-ink" stroke-width="2" stroke-linejoin="round">
+          <rect x="8"  y="10" width="20" height="44" rx="3" class="f-red"/>
+          <rect x="11" y="4"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="42" y="14" width="20" height="40" rx="3" class="f-blue"/>
+          <rect x="45" y="8"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="76" y="8"  width="20" height="46" rx="3" class="f-solid"/>
+          <rect x="79" y="2"  width="14" height="8"  rx="2" class="f-paper"/>
+          <rect x="130" y="26" width="80" height="28" rx="3" class="f-paper"/>
+          <path d="M130 40h80" stroke-width="1.6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/board.js?v=20260828b" defer></script>
+</body>
+</html>

@@ -47,6 +47,7 @@
     </a>
     <nav aria-label="Primary">
       <ul class="nav-links">
+        <li><a href="under-the-hood.html">Under the hood</a></li>
         <li><a href="in-your-tenant.html">In your tenant</a></li>
         <li><a href="the-kit.html">The kit</a></li>
       </ul>
@@ -205,6 +206,18 @@
       <span class="note note--blue spot-card">
         <span class="note-title">Ask me how</span>
         <span class="spot-line">what it was built with</span>
+        <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
+      </span>
+    </button>
+
+    <!-- HOOD — the folder leaning on the tray, out to the long version -->
+    <button class="spot s-hood" data-panel="hood" aria-label="Folder by the tray &mdash; under the hood, the long version">
+      <span class="spot-card s-hood-card">
+        <span class="hood-tab"></span>
+        <span class="hood-body">
+          <span class="note-title">Under the hood</span>
+          <span class="spot-line">the long version</span>
+        </span>
         <span class="spot-zoom annot annot--plain">zoom &rarr;</span>
       </span>
     </button>
@@ -371,6 +384,7 @@
   <a class="pill" href="#panel-builder" data-panel="builder">The builder</a>
   <a class="pill" href="#panel-trail" data-panel="trail">Experience</a>
   <a class="pill" href="#panel-ask" data-panel="ask">Ask me how</a>
+  <a class="pill" href="#panel-hood" data-panel="hood">Under the hood</a>
   <a class="pill" href="#panel-loop" data-panel="loop">How it works</a>
   <a class="pill" href="#panel-kit" data-panel="kit">Starter kit</a>
   <a class="pill" href="#panel-skills" data-panel="skills">Skill catalog</a>
@@ -435,6 +449,10 @@
 
       <p class="panel-note">I know the enterprise constraints, and I&rsquo;ve built the AI
       side by hand. This board puts the two in the same place.</p>
+
+      <p class="panel-actions">
+        <a class="btn btn--ghost" href="under-the-hood.html">The long version &mdash; how it&rsquo;s actually built &rarr;</a>
+      </p>
 
       <ul class="footer-links panel-pending">
         <li><span class="pending">About the builder<span class="tag">pending</span></span></li>
@@ -566,6 +584,42 @@
 
       <p class="panel-actions">
         <a class="btn btn--ghost" href="the-kit.html#catalog">the catalog &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-hood" tabindex="-1" aria-labelledby="t-hood">
+    <div class="panel-paper">
+      <span class="tape tape--top"></span>
+      <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
+      <span class="panel-eyebrow mono">the folder by the tray</span>
+      <h2 id="t-hood">Under the hood</h2>
+
+      <p>This board is the short version. There is a longer one for anyone who wants the
+      actual build &mdash; the four layers and why only one of them has to survive, what the
+      operator layer enforces, the eight boring decisions in the app that decide whether
+      someone else can support it, and the integration choice I would make again on
+      someone else&rsquo;s tenant.</p>
+
+      <ul class="ruled">
+        <li><strong>The anatomy</strong> &mdash; files, rules, operator, surfaces, and why a
+        routing index beats letting an agent search for where things go.</li>
+        <li><strong>The operator layer</strong> &mdash; three files per skill, three caps per
+        autonomous run, one gate before anything writes. Plus the version that failed.</li>
+        <li><strong>The app over it</strong> &mdash; two API surfaces, a generated spec, path
+        containment in two layers, atomic writes, approvals as files, a usage ledger that
+        marks its own guesses.</li>
+        <li><strong>One definition, many surfaces</strong> &mdash; why the tool definitions
+        live in one module, and when not to build a custom server at all.</li>
+        <li><strong>Where it goes next</strong> &mdash; six moves from a single-operator
+        system to one that serves a practice.</li>
+      </ul>
+
+      <p class="panel-note">That last section is design, not deployment, and the page says
+      so in those words. Everything above it is running today.</p>
+
+      <p class="panel-actions">
+        <a class="btn" href="under-the-hood.html">Read the long version &rarr;</a>
       </p>
     </div>
   </section>

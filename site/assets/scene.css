@@ -879,3 +879,31 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 @media (max-width: 560px) {
   .decoded li { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* under the hood — a folder tucked under the torn principle page, bottom
+   left. The board is full; this is the one gap that isn't under the zoom
+   control, and a folder below a pinned page is where a long document lands. */
+.s-hood { left: 56px; top: 706px; width: 152px; }
+.s-hood-card { display: block; position: relative; padding-top: 11px; }
+.hood-tab {
+  position: absolute;
+  top: 0; left: 11px;
+  width: 64px; height: 14px;
+  background: var(--note-yellow);
+  border: var(--stroke-thin) solid var(--ink);
+  border-bottom: 0;
+  border-radius: 6px 10px 0 0 / 8px 8px 0 0;
+}
+.hood-body {
+  display: block;
+  position: relative;
+  background: var(--note-yellow);
+  border: var(--stroke-thin) solid var(--ink);
+  border-radius: 3px 9px 4px 8px / 8px 4px 9px 3px;
+  box-shadow: var(--lift);
+  padding: 8px 11px 9px;
+}
+.s-hood .spot-card { --rot: -1.6deg; }
+.s-hood .note-title { display: block; font-size: 13.5px; line-height: 1.15; margin-bottom: 1px; }
+.s-hood .spot-line { font-size: 10px; line-height: 1.3; }
+.s-hood .spot-zoom { right: 6px; bottom: -14px; }

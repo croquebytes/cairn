@@ -1028,6 +1028,298 @@ section { position: relative; }
 }
 
 
+/* ========================================================================
+   Under the hood — three pieces on the workbench and the north-star loop
+   These selectors stay scoped to the new explanation blocks so the board's
+   existing notes, cards, and navigation keep their established behavior.
+   ======================================================================== */
+
+.section--identity .identity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--u2), 2.4vw, var(--u4));
+  align-items: start;
+}
+
+.section--identity .identity-card {
+  --identity-bg: var(--board-white);
+  --identity-rot: 0deg;
+  position: relative;
+  min-width: 0;
+  padding: var(--u4) var(--u3) var(--u3);
+  background: var(--identity-bg);
+  border: var(--stroke-thin) solid var(--ink);
+  border-radius: 5px 24px 4px 20px / 18px 5px 22px 4px;
+  box-shadow: var(--lift);
+  transform: rotate(var(--identity-rot));
+}
+
+/* A small piece of tape makes the cards feel placed on the same bench,
+   while the paper tints carry the distinction between each layer. */
+.section--identity .identity-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 76px;
+  height: 20px;
+  background: var(--tape);
+  box-shadow: var(--lift-tape);
+  clip-path: polygon(3% 4%, 97% 0%, 100% 80%, 94% 100%, 6% 96%, 0% 18%);
+  transform: translateX(-50%) rotate(-2deg);
+  pointer-events: none;
+}
+
+.section--identity .identity-card--system {
+  --identity-bg: var(--note-yellow);
+  --identity-rot: -1.2deg;
+}
+
+.section--identity .identity-card--surface {
+  --identity-bg: var(--note-blue);
+  --identity-rot: 0.8deg;
+  border-color: var(--ink-blue);
+}
+
+.section--identity .identity-card--public {
+  --identity-bg: var(--note-green);
+  --identity-rot: -0.6deg;
+  border-color: var(--ink-green);
+}
+
+.section--identity .identity-kicker {
+  display: block;
+  margin-bottom: var(--u2);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--t-note);
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.section--identity .identity-card h3,
+.section--identity .identity-card h4 {
+  margin: 0 0 var(--u1);
+  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+}
+
+.section--identity .identity-card p {
+  font-size: var(--t-small);
+  line-height: 1.55;
+}
+
+.section--identity .identity-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: var(--u3);
+  padding-top: var(--u1);
+  border-top: 1px solid currentColor;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--t-note);
+  line-height: 1.4;
+}
+
+.section--identity .identity-status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.section--identity .identity-card--system .identity-status { color: var(--ink-red-text); }
+.section--identity .identity-card--surface .identity-status { color: var(--ink-blue-text); }
+.section--identity .identity-card--public .identity-status { color: var(--ink-green-text); }
+
+.north-star {
+  margin-top: var(--u8);
+  padding-block: var(--u3) var(--u4);
+  border-top: var(--stroke) solid var(--ink);
+  border-bottom: var(--stroke-thin) solid var(--ink);
+}
+
+.north-star .north-star-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--u3);
+  margin-bottom: var(--u3);
+}
+
+.north-star .north-star-head h2,
+.north-star .north-star-head h3 {
+  margin: 0;
+  font-size: clamp(1.375rem, 2.4vw, 2rem);
+}
+
+.north-star .north-star-head p {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--t-small);
+}
+
+.north-star .loop-line {
+  display: flex;
+  align-items: stretch;
+  gap: var(--u1);
+  min-width: 0;
+}
+
+.north-star .loop-step {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: var(--u2) var(--u3);
+  background: var(--board-white);
+  border: var(--stroke-thin) solid var(--ink);
+  border-radius: 4px 18px 3px 16px / 15px 4px 17px 3px;
+}
+
+.north-star .loop-step:nth-of-type(odd) {
+  background: var(--note-yellow);
+}
+
+.north-star .loop-step:nth-child(6n + 3) {
+  background: var(--note-blue);
+}
+
+.north-star .loop-step:nth-child(6n + 5) {
+  background: var(--note-green);
+}
+
+.north-star > p { margin-top: var(--u3); }
+
+.north-star .loop-step strong,
+.north-star .loop-step b {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.15;
+}
+
+.north-star .loop-step span,
+.north-star .loop-step p {
+  display: block;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--t-note);
+  line-height: 1.45;
+}
+
+.north-star .loop-arrow {
+  display: grid;
+  flex: 0 0 28px;
+  place-items: center;
+  align-self: center;
+  color: var(--ink-blue-text);
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.north-star .loop-arrow svg {
+  display: block;
+  width: 28px;
+  height: 24px;
+  overflow: visible;
+}
+
+.north-star .loop-arrow path,
+.north-star .loop-arrow line,
+.north-star .loop-arrow polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--stroke-thin);
+}
+
+@media (max-width: 700px) {
+  .section--identity .identity-grid {
+    grid-template-columns: 1fr;
+    gap: var(--u4);
+  }
+
+  .section--identity .identity-card {
+    width: min(calc(100% - var(--u2)), 34rem);
+    margin-inline: auto;
+    padding: var(--u3);
+  }
+
+  .north-star .north-star-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--u1);
+  }
+
+  .north-star .loop-line {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .north-star .loop-step { width: 100%; }
+
+  .north-star .loop-arrow {
+    width: 100%;
+    min-height: 28px;
+    transform: rotate(90deg);
+  }
+
+  .board-table--decisions {
+    min-width: 0;
+    border-width: var(--stroke-thin);
+  }
+
+  .board-table--decisions thead { display: none; }
+
+  .board-table--decisions tbody,
+  .board-table--decisions tr,
+  .board-table--decisions td { display: block; }
+
+  .board-table--decisions tr {
+    padding: var(--u2);
+    border-bottom: var(--stroke-thin) solid var(--ink);
+  }
+
+  .board-table--decisions tbody tr:last-child { border-bottom: 0; }
+
+  .board-table--decisions td {
+    padding: var(--u1);
+    border: 0;
+  }
+
+  .board-table--decisions td:last-child {
+    color: var(--ink-soft);
+    font-size: var(--t-note);
+  }
+
+  .board-table--decisions td:last-child::before {
+    content: "prevents";
+    display: block;
+    margin-bottom: 3px;
+    color: var(--ink-blue-text);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section--identity .identity-card,
+  .north-star .loop-arrow {
+    transform: none;
+  }
+}
+
+
 /* ==========================================================================
    Print — the board flattens to paper. No motion, no smudges, no dot grid.
    ========================================================================== */
@@ -1041,6 +1333,8 @@ section { position: relative; }
   .circled > svg path { stroke-dashoffset: 0 !important; animation: none !important; }
   .draw path { stroke-dashoffset: 0 !important; }
   .board-table { min-width: 0; }
+  .section--identity .identity-card,
+  .north-star .loop-arrow { transform: none; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; }
 }
 

@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260828b">
-<link rel="stylesheet" href="assets/scene.css?v=20260828b">
+<link rel="stylesheet" href="assets/board.css?v=20260828c">
+<link rel="stylesheet" href="assets/scene.css?v=20260828c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -362,7 +362,7 @@
       <span class="sticker-label">CO</span>
     </span>
 
-    <span class="sticker sticker-hot sticker-composite st-tx" data-note-title="Texas" data-note="Another stop on the map." aria-hidden="true">
+    <span class="sticker sticker-hot sticker-composite st-tx" data-note-title="Texas" data-note="The route&rsquo;s detour: VA &rarr; CO &rarr; TX &rarr; back to VA." aria-hidden="true">
       <img class="sticker-art" src="assets/stickers/sticker-texas-v1.png"
            width="640" height="628" alt="" loading="lazy" decoding="async" draggable="false">
       <span class="sticker-label">TX</span>
@@ -489,7 +489,7 @@
           <p>The cloud move and refresh landed shortly before COVID, so going remote was
           a non-event. Then came the real test: managing the same environment, the same
           sites and the same compliance, fully remote and across time zones. That is the
-          delivery model of the work I&rsquo;m aiming at now, practiced early.</p>
+          delivery model I&rsquo;m aiming at now. I learned it early.</p>
         </div>
         <div class="trail-entry">
           <span class="trail-when mono">2021 &ndash; 2025</span>
@@ -501,9 +501,9 @@
         <div class="trail-entry">
           <span class="trail-when mono">2024 &ndash; now</span>
           <h3>The system behind this board</h3>
-          <p>Built and operate the knowledge system Cairn is extracted from: 69 skills,
-          agent roles with written boundaries, a custom MCP server, tiered permissions,
-          an approval gate, an append-only log. The receipts are pinned all over this
+          <p>I built and operate the knowledge system Cairn is extracted from: 69 skills,
+          5 agent roles with written boundaries, a custom MCP server, tiered permissions,
+          an approval gate, and an append-only log. The receipts are pinned all over this
           board.</p>
         </div>
       </div>
@@ -523,11 +523,11 @@
     <div class="panel-paper">
       <span class="tape tape--top"></span>
       <button class="panel-close" data-close aria-label="Close panel and zoom back out">&times;</button>
-      <span class="panel-eyebrow mono">the blue sticky, bottom of the board</span>
+      <span class="panel-eyebrow mono">the blue sticky, beside the loop</span>
       <h2 id="t-ask">Ask me how</h2>
 
-      <p>Openers, if you want to poke at any of it. Every answer is somewhere on
-      this board or in the kit.</p>
+      <p>If you want to get into the mechanisms, start here. I can walk through what is
+      running, what is still a direction, and why the boundaries are where they are.</p>
 
       <ul class="ask-list">
         <li><span class="ask-q">&ldquo;How do you stop an agent doing something stupid?&rdquo;</span>
@@ -544,27 +544,25 @@
 
         <li><span class="ask-q">&ldquo;How would this work in our tenant?&rdquo;</span>
         Markdown in a document library, frontmatter as metadata columns, approvals
-        through Power Automate, the log as a list with Purview behind it. Nothing new to
-        buy. The mapping page walks the whole table.</li>
+        through Power Automate, the log as a list with Purview behind it. The mapping
+        page shows where that translation is straightforward and where live wiring
+        starts.</li>
 
         <li><span class="ask-q">&ldquo;How do you know it still works?&rdquo;</span>
         The system reports its own blind spots: stale routing index, a batch that
         stopped at a cap and was never finished, gated actions with no approval line.
         It raises them rather than waiting to be asked.</li>
 
-        <li><span class="ask-q">&ldquo;How did you learn all this?&rdquo;</span>
-        By running it daily and writing down what broke. Every guardrail in the kit
-        traces to a specific failure. The append-only log is what made that possible &mdash;
-        you cannot learn from a history you are allowed to edit.</li>
+        <li><span class="ask-q">&ldquo;What changed after the first version?&rdquo;</span>
+        A restart dropped approvals silently, so the gate became a durable, file-backed
+        workflow with a notification when a request is created. Every guardrail in the
+        kit traces to a failure like that.</li>
       </ul>
 
       <h3>Built with the vault</h3>
-      <p>This site is not a side project to the system; it came out of it. The board
-      was planned, drafted, and revised through the same loop it describes &mdash;
-      captured to an inbox, curated, operated on by skills, and logged. The copy went
-      through a written anti-slop pass. The claims on it were checked against the source
-      system rather than asserted, and one was removed when the logs would not support
-      it.</p>
+      <p>This site came out of the same system it describes. The board was planned,
+      drafted, revised, and logged through the vault loop. The claims were checked
+      against the source system; one was cut when the log could not support it.</p>
 
       <h3>The stickers, decoded</h3>
       <p class="panel-note">Hover any sticker on the board for the same line.</p>
@@ -573,7 +571,7 @@
         <li><span class="d-k">the mountains</span><span>Our favourite place, and the reason Colorado is on this board at all.</span></li>
         <li><span class="d-k">CO</span><span>The one we keep going back to. Mountains, mostly.</span></li>
         <li><span class="d-k">VA</span><span>Where the enterprise Microsoft 365 years happened.</span></li>
-        <li><span class="d-k">TX</span><span>Another stop on the map.</span></li>
+        <li><span class="d-k">TX</span><span>The route&rsquo;s detour: VA &rarr; CO &rarr; TX &rarr; back to VA.</span></li>
         <li><span class="d-k">London</span><span>Furthest marker on the trail so far.</span></li>
         <li><span class="d-k">games</span><span>Where a lot of the systems thinking comes from. Rules, state, and what happens when a player does the unexpected.</span></li>
         <li><span class="d-k">headphones</span><span>Most of this board was built with these on.</span></li>
@@ -819,6 +817,6 @@
 </footer>
 
 <script src="assets/board.js?v=20260828b" defer></script>
-<script src="assets/scene.js?v=20260828b" defer></script>
+<script src="assets/scene.js?v=20260828c" defer></script>
 </body>
 </html>

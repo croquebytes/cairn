@@ -319,13 +319,22 @@
     tip.classList.add('is-on');
   }
 
+  function isInside(el, node) {
+    return node && (node === el || el.contains(node));
+  }
+
   plane.addEventListener('mouseover', function (e) {
     var el = e.target.closest && e.target.closest('.sticker-hot');
-    if (el && el !== tipFor && !openId) showTip(el);
+    /* Composite stickers contain an img and sometimes a label. Ignore the
+       synthetic over/out pair produced while moving between those children;
+       otherwise the note briefly disappears and reappears under the pointer. */
+    if (el && !isInside(el, e.relatedTarget) && el !== tipFor && !openId) {
+      showTip(el);
+    }
   });
   plane.addEventListener('mouseout', function (e) {
     var el = e.target.closest && e.target.closest('.sticker-hot');
-    if (el && el === tipFor) hideTip();
+    if (el && el === tipFor && !isInside(el, e.relatedTarget)) hideTip();
   });
   /* any camera move or panel change invalidates the position */
   stage.addEventListener('pointerdown', hideTip);
@@ -412,6 +421,7 @@
     if (!sceneActive()) return;   /* document mode: the anchor does the work */
     var panel = document.getElementById('panel-' + id);
     if (!panel) return;
+    hideTip();
     if (openId && openId !== id) {
       var prev = document.getElementById('panel-' + openId);
       if (prev) prev.classList.remove('open');

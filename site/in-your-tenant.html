@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/board.css?v=20260828b">
+<link rel="stylesheet" href="assets/board.css?v=20260828c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAFAF7'/%3E%3Cg fill='none' stroke='%23000' stroke-width='2.2'%3E%3Cellipse cx='16' cy='24' rx='11' ry='4'/%3E%3Cellipse cx='16' cy='16.5' rx='8' ry='3.4'/%3E%3Cellipse cx='16' cy='9.5' rx='5' ry='2.8'/%3E%3C/g%3E%3C/svg%3E">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -72,9 +72,9 @@
 <section class="board section">
   <div class="section-head">
     <span class="section-num">01 &mdash; the mapping</span>
-    <h2 class="rot-p1">Every part of the vault already has a name here</h2>
+    <h2 class="rot-p1">The same pattern, in tenant language</h2>
     <p class="section-lead">
-      The landing page has the short version. Here is the whole mapping. Read it as a
+      The board gives the short version. Here is the whole mapping. Read it as a
       translation, not a migration; nothing in the right-hand column is a new product.
     </p>
   </div>
@@ -141,7 +141,7 @@
       <p>Every engagement gets a vault in the client's own SharePoint: discovery
       notes, an append-only decision log, the as-built, and runbooks that ship as
       skills. When the delivery engineer changes, the vault <em>is</em> the handoff.
-      Institutional memory that survives turnover.</p>
+      The vault is the handoff.</p>
       <span class="reuses">reuses: the whole loop, plus the decision register</span>
     </article>
 
@@ -155,10 +155,9 @@
         </g>
       </svg>
       <h3>Curate once, serve both</h3>
-      <p>Index the vault through a Graph connector and Copilot and Claude answer
-      from the same curated source. Clients ask "Copilot or Claude?" The vault
-      answer is that this is a runtime choice, not a knowledge choice. The adapter
-      story at tenant scale.</p>
+      <p>A Graph connector could put the same curated source in Copilot; an adapter can
+      point Claude at that vault. Clients ask "Copilot or Claude?" The answer is that
+      this is a runtime choice, not a knowledge choice.</p>
       <span class="reuses">reuses: CLAUDE.md / AGENTS.md adapters, MOC routing</span>
     </article>
 
@@ -236,8 +235,7 @@
 
       <h3>The SharePoint library, directly</h3>
       <p>.md files with metadata columns, edited in the browser. The no-install
-      answer, and the one that makes the pattern visible to people who will never
-      open a code editor.</p>
+      answer for people who will never open a code editor.</p>
 
       <h3>Loop and OneNote as human surfaces</h3>
       <p>Where an organisation already lives in these, a small sync skill normalises
@@ -268,9 +266,9 @@
   <div class="callout callout--blue">
     <span class="callout-label">Where to start</span>
     <p>Take one engagement, one shared mailbox, or one policy set. Stand the vault up
-    there, run it for a month, and read the chronicle at the end of it. The pattern
-    either earned its place in that month or it did not, and the log is what tells
-    you which, rather than anyone's impression.</p>
+    there, use it through a real piece of work, and read the chronicle at the end. The
+    log tells you whether the pattern earned its place, rather than anyone&rsquo;s
+    impression.</p>
   </div>
 
   <p><a class="btn btn--blue" href="the-kit.html">See what ships in the kit</a></p>

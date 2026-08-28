@@ -734,22 +734,25 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
   opacity: 0.88;
   filter: none;
 }
+.sticker-route { z-index: 2; }
+.sticker-route g { opacity: 0.96; }
+.sticker-route g > path { stroke-width: 3.6; }
 .st-travel-loop .route-to-co { stroke: var(--ink-blue); }
 .st-travel-loop .route-to-tx { stroke: var(--ink-green); }
 .st-travel-loop .route-to-va { stroke: var(--ink-red); }
-.st-va        { left: 1580px; top: 282px; width: 84px;  --rot:  -7deg; }
+.st-va        { left: 1580px; top: 282px; width: 84px;  --rot:  -7deg; z-index: 3; }
 .st-va .sticker-label {
   left: 42%; top: 51%;
   color: var(--board-white);
   font-size: 10px;
 }
-.st-co        { left: 1568px; top: 382px; width: 84px;  --rot:   5deg; }
+.st-co        { left: 1568px; top: 382px; width: 84px;  --rot:   5deg; z-index: 3; }
 .st-co .sticker-label {
   left: 0; top: 61%; width: 100%;
   color: var(--board-white);
   font-size: 11px;
 }
-.st-tx        { left: 1582px; top: 482px; width: 78px;  --rot:  -4deg; }
+.st-tx        { left: 1582px; top: 482px; width: 78px;  --rot:  -4deg; z-index: 3; }
 .st-tx .sticker-label {
   left: 0; top: 47%; width: 100%;
   color: var(--board-white);
@@ -778,18 +781,23 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 .sticker-hot {
   pointer-events: auto;
   cursor: help;
+  transform-origin: center;
 }
 .sticker-hot:hover { filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16)); }
 
 @media (prefers-reduced-motion: no-preference) {
   .sticker-hot { transition: filter var(--micro) ease-out, transform var(--micro) ease-out; }
-  .sticker-hot:hover { transform: rotate(var(--rot, 0deg)) scale(1.06); }
+  /* Keep the object readable at its authored size. A tiny lift is enough to
+     acknowledge discovery without making the board reflow under the cursor. */
+  .sticker-hot:hover { transform: rotate(var(--rot, 0deg)) scale(1.025); }
 }
 
 .sticker-tip {
   position: absolute;
   z-index: 40;
+  box-sizing: border-box;
   max-width: 268px;
+  width: max-content;
   padding: 10px 13px 11px;
   background: var(--board-white);
   border: var(--stroke-thin) solid var(--ink);
@@ -820,6 +828,7 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
   font-size: 13.5px;
   line-height: 1.45;
   color: var(--ink);
+  overflow-wrap: break-word;
 }
 
 /* the board is hidden on phones, so these never apply there */
@@ -838,7 +847,14 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
    in fact even though a box-level scan calls it occupied. Clear of the cairn
    art entirely, and 43 units above the loop strip. */
 .s-ask { left: 540px; top: 330px; width: 136px; z-index: 4; }
-.s-ask .note { padding: 9px 11px 10px; }
+.s-ask .note {
+  padding: 9px 11px 10px;
+  transform: rotate(var(--rot, 0deg));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .s-ask .note:hover,
+  .s-ask .note:focus-within { transform: rotate(0deg) translateY(-3px); }
+}
 .s-ask .note-title { font-size: 14px; display: block; margin-bottom: 2px; line-height: 1.15; }
 .s-ask .spot-line { font-size: 10.5px; line-height: 1.35; }
 .s-ask .spot-card { --rot: -2.2deg; }
@@ -883,8 +899,15 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 /* under the hood — a folder tucked under the torn principle page, bottom
    left. The board is full; this is the one gap that isn't under the zoom
    control, and a folder below a pinned page is where a long document lands. */
-.s-hood { left: 56px; top: 706px; width: 152px; }
+.s-hood { left: 56px; top: 706px; width: 152px; z-index: 4; }
 .s-hood-card { display: block; position: relative; padding-top: 11px; }
+.s-hood .spot-card {
+  transform: rotate(var(--rot, 0deg));
+  transform-origin: center top;
+  transition: transform var(--standard) var(--ease-out);
+}
+.s-hood:hover .spot-card,
+.s-hood:focus-visible .spot-card { transform: rotate(0deg) translateY(-3px); }
 .hood-tab {
   position: absolute;
   top: 0; left: 11px;
@@ -907,3 +930,9 @@ body.panel-open .spot:not(.spot--active) { opacity: 0.45; }
 .s-hood .note-title { display: block; font-size: 13.5px; line-height: 1.15; margin-bottom: 1px; }
 .s-hood .spot-line { font-size: 10px; line-height: 1.3; }
 .s-hood .spot-zoom { right: 6px; bottom: -14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .s-hood .spot-card { transition: none; }
+  .s-hood:hover .spot-card,
+  .s-hood:focus-visible .spot-card { transform: rotate(var(--rot, 0deg)); }
+}
